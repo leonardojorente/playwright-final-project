@@ -3,12 +3,21 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "basic test": "playwright test tests/ui/e2e-tests/basic-tests.spec.ts",
+    "ui mode": "playwright test --ui",
+    "report": "playwright show-report",
+    "debug": "playwright test --debug",
+    "codegen": "playwright codegen"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@playwright/test": "^1.53.0",
     "@types/node": "^24.0.1"
+  },
+  "dependencies": {
+    "dotenv": "^16.5.0"
   }
 }
