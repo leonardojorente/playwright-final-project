@@ -20,6 +20,8 @@ jobs:
 
   e2e-tests:
     runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.47.2-jammy
 
     steps:
       - uses: actions/checkout@v4
@@ -32,7 +34,7 @@ jobs:
         run: npm ci
 
       - name: Install Playwright Browsers
-        run: PLAYWRIGHT_BROWSERS_PATH=0 npx playwright install --with-deps chromium
+        run: npx playwright install --with-deps chromium
         env:
           HOME: /root
           USER:  ${{ env.USER }}
