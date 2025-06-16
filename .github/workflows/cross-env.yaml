@@ -39,7 +39,7 @@ jobs:
           HOME: /root
           USER:  ${{ env.USER }}
           PASSWORD: ${{ secrets.PASSWORD }}
-          BASE_URL_WEB: ${{ env.BASE_URL_WEB }} 
+          BASE_URL_WEB: ${{ secrets.BASE_URL_WEB }} 
           BASE_URL_API: ${{ env.BASE_URL_API }}
 
       - name: Run Playwright tests
