@@ -22,17 +22,18 @@ jobs:
     runs-on: ubuntu-latest
     #container:
      # image: mcr.microsoft.com/playwright:v1.47.2-jammy
-    env:
-      HOME: /root
-      USER:  ${{ vars.USER }}
-      PASSWORD: ${{ secrets.PASSWORD }}
-      BASE_URL_WEB: ${{ vars.BASE_URL_WEB }} 
-      BASE_URL_API: ${{ vars.BASE_URL_API }}
 
     steps:
       - name: read a variable
-        run: echo "The USER is ${{ vars.USER }} and the base url is ${{ vars.BASE_URL_WEB }} and ${{secrets.TEST}}"
-          
+        run: echo "The USER is $USER and the base url is $BASE_URL_WEB and $TEST"
+        env:
+          HOME: /root
+          USER:  ${{ vars.USER }}
+          PASSWORD: ${{ secrets.PASSWORD }}
+          BASE_URL_WEB: ${{ vars.BASE_URL_WEB }} 
+          BASE_URL_API: ${{ vars.BASE_URL_API }}
+          TEST: ${{ secrets.TEST }}
+  
       #- uses: actions/checkout@v4
 
       #- uses: actions/setup-node@v4
