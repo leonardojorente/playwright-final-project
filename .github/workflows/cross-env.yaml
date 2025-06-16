@@ -34,10 +34,10 @@ jobs:
         run: npx playwright install --with-deps
         env:
           HOME: /root
-          USER:  ${{ secrets.USER }}
+          USER:  ${{ env.USER }}
           PASSWORD: ${{ secrets.PASSWORD }}
-          BASE_URL_WEB: ${{ secrets.BASE_URL_WEB }} 
-          BASE_URL_API: ${{ secrets.BASE_URL_API }}
+          BASE_URL_WEB: ${{ env.BASE_URL_WEB }} 
+          BASE_URL_API: ${{ env.BASE_URL_API }}
 
       - name: Run Playwright tests
         run: npx playwright test tests/ui/e2e-tests/cross-env-tests.spec.ts
