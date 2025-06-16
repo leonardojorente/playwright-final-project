@@ -1,12 +1,31 @@
-name: 'Basic E2E Tests'
+name: 'Cross Env E2E Tests'
 
 on:
   workflow_dispatch:
     inputs:
       environment:
+        description: 'Select the environment to run the tests against'
+        required: true
         type: environment
+        default: prod
+            
+      message:
+        description: 'Select the environment to run the tests against'
+        required: true
+        type: choice
+        options:
+          - prod
+          - dev
+        
 
 jobs:
+  option-example:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Send greeting
+        run: echo "input message option selected -> ${{ github.event.inputs.message }}|| input environment selected -> ${{ github.event.inputs.environment }}"
+
   e2e-tests:
     runs-on: ubuntu-latest
 
@@ -21,6 +40,12 @@ jobs:
         run: npm ci
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
+        env:
+          HOME: /root
+          USER:  ${{ secrets.USER }}
+          PASSWORD: ${{ secrets.PASSWORD }}
+          BASE_URL_WEB: ${{ secrets.BASE_URL_WEB }} 
+          BASE_URL_API: ${{ secrets.BASE_URL_API }}
 
       - name: Run Playwright tests
-        run: cross-env TEST_ENV=prod playwright test tests/ui/e2e-tests/cross-env-tests.spec.ts
+        run: npx playwright test tests/ui/e2e-tests/cross-env-tests.spec.ts
