@@ -25,7 +25,7 @@ jobs:
 
     steps:
       - name: Validate secrets
-        if: ${{ !env.BASE_URL_WEB }}
+        if: ${{ !vars.BASE_URL_WEB }}
         run: |
           echo "::error::BASE_URL_WEB is not set!"
           exit 1
@@ -43,10 +43,10 @@ jobs:
         run: npx playwright install --with-deps chromium
         env:
           HOME: /root
-          USER:  ${{ env.USER }}
+          USER:  ${{ vars.USER }}
           PASSWORD: ${{ secrets.PASSWORD }}
-          BASE_URL_WEB: ${{ env.BASE_URL_WEB }} 
-          BASE_URL_API: ${{ env.BASE_URL_API }}
+          BASE_URL_WEB: ${{ vars.BASE_URL_WEB }} 
+          BASE_URL_API: ${{ vars.BASE_URL_API }}
 
       - name: Run Playwright tests
         run: npx playwright test tests/ui/e2e-tests/cross-env-tests.spec.ts
