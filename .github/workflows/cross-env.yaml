@@ -31,7 +31,7 @@ jobs:
 
     steps:
       - name: read a variable
-        run: echo "The USER is ${{ vars.USER }} and the base url is ${{ vars.BASE_URL_WEB }}"
+        run: echo "The USER is ${{ vars.USER }} and the base url is ${{ vars.BASE_URL_WEB }} and ${{secrets.TEST}}"
           
       #- uses: actions/checkout@v4
 
