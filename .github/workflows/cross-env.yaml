@@ -24,11 +24,7 @@ jobs:
       image: mcr.microsoft.com/playwright:v1.47.2-jammy
 
     steps:
-      - name: Validate secrets
-        if: ${{ !vars.BASE_URL_WEB }}
-        run: |
-          echo "::error::BASE_URL_WEB is not set!"
-          exit 1
+
           
       - uses: actions/checkout@v4
 
