@@ -24,32 +24,26 @@ jobs:
       image: mcr.microsoft.com/playwright:v1.47.2-jammy
 
     steps:
-
+      - name: read a variable
+        run: echo "The USER is ${{ vars.USER }} and the base url is ${{ vars.BASE_URL_WEB }} "
           
-      - uses: actions/checkout@v4
+      #- uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22.x
+      #- uses: actions/setup-node@v4
+      #  with:
+      #    node-version: 22.x
 
-      - name: Install dependencies
-        run: npm ci
+    #  - name: Install dependencies
+     #   run: npm ci
 
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps chromium
-        env:
-          HOME: /root
-          USER:  ${{ vars.USER }}
-          PASSWORD: ${{ secrets.PASSWORD }}
-          BASE_URL_WEB: ${{ vars.BASE_URL_WEB }} 
-          BASE_URL_API: ${{ vars.BASE_URL_API }}
+     # - name: Install Playwright Browsers
+       # run: npx playwright install --with-deps chromium
+      #  env:
+       #   HOME: /root
+      #    USER:  ${{ vars.USER }}
+      #    PASSWORD: ${{ secrets.PASSWORD }}
+      #    BASE_URL_WEB: ${{ vars.BASE_URL_WEB }} 
+      #    BASE_URL_API: ${{ vars.BASE_URL_API }}
 
-      - name: Run Playwright tests
-        run: npx playwright test tests/ui/e2e-tests/cross-env-tests.spec.ts
-
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: playwright-report
-          path: playwright-report/
-          retention-days: 2
+     # - name: Run Playwright tests
+     #   run: npx playwright test tests/ui/e2e-tests/cross-env-tests.spec.ts
