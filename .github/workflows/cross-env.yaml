@@ -21,37 +21,29 @@ jobs:
   e2e-tests:
     runs-on: ubuntu-latest
     environment: ${{ github.event.inputs.environment }}
-    #container:
-     # image: mcr.microsoft.com/playwright:v1.47.2-jammy
+    container:
+      image: mcr.microsoft.com/playwright:v1.47.2-jammy
 
     steps:
       - name: read a variable
         run: echo "The USER is $USER and the base url is $BASE_URL_WEB and $TEST"
         env:
-          HOME: /root
           USER:  ${{ vars.USER }}
           PASSWORD: ${{ secrets.PASSWORD }}
           BASE_URL_WEB: ${{ vars.BASE_URL_WEB }} 
           BASE_URL_API: ${{ vars.BASE_URL_API }}
-          TEST: ${{ secrets.TEST }}
   
-      #- uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      #- uses: actions/setup-node@v4
-      #  with:
-      #    node-version: 22.x
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
 
-    #  - name: Install dependencies
-     #   run: npm ci
+      - name: Install dependencies
+        run: npm ci
 
-     # - name: Install Playwright Browsers
-       # run: npx playwright install --with-deps chromium
-      #  env:
-       #   HOME: /root
-      #    USER:  ${{ vars.USER }}
-      #    PASSWORD: ${{ secrets.PASSWORD }}
-      #    BASE_URL_WEB: ${{ vars.BASE_URL_WEB }} 
-      #    BASE_URL_API: ${{ vars.BASE_URL_API }}
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps chromium
 
-     # - name: Run Playwright tests
-     #   run: npx playwright test tests/ui/e2e-tests/cross-env-tests.spec.ts
+      - name: Run Playwright tests
+        run: npx playwright test tests/ui/e2e-tests/cross-env-tests.spec.ts
