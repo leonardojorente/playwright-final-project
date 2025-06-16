@@ -28,10 +28,10 @@ jobs:
       PASSWORD: ${{ secrets.PASSWORD }}
       BASE_URL_WEB: ${{ vars.BASE_URL_WEB }} 
       BASE_URL_API: ${{ vars.BASE_URL_API }}
-      
+
     steps:
       - name: read a variable
-        run: echo "The USER is $USER and the base url is $BASE_URL_WEB }} "
+        run: echo "The USER is ${{ vars.USER }} and the base url is ${{ vars.BASE_URL_WEB }}"
           
       #- uses: actions/checkout@v4
 
