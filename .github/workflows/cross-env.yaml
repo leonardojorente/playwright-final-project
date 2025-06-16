@@ -1,5 +1,5 @@
 name: 'Cross Env E2E Tests'
-
+#https://github.blog/changelog/2021-11-10-github-actions-input-types-for-manual-workflows/
 on:
   workflow_dispatch:
     inputs:
@@ -7,15 +7,7 @@ on:
         description: 'Select the environment to run the tests against'
         required: true
         type: environment
-        default: prod
-            
-      message:
-        description: 'Select the environment to run the tests against'
-        required: true
-        type: choice
-        options:
-          - prod
-          - dev
+        default: dev
         
 
 jobs:
@@ -24,7 +16,7 @@ jobs:
 
     steps:
       - name: Send greeting
-        run: echo "input message option selected -> ${{ github.event.inputs.message }}|| input environment selected -> ${{ github.event.inputs.environment }}"
+        run: echo "input environment selected -> ${{ github.event.inputs.environment }}"
 
   e2e-tests:
     runs-on: ubuntu-latest
