@@ -20,6 +20,7 @@ jobs:
 
   e2e-tests:
     runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.environment }}
     #container:
      # image: mcr.microsoft.com/playwright:v1.47.2-jammy
 
