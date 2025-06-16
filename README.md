@@ -6,3 +6,7 @@ Config of MCP server
 Set .env
     1-npm i dotenv
     2-config at playwright.config.ts
+
+Set cross-env to withc between .env
+    1-npm i cross-env
+    2-check .env and package.json to understand better

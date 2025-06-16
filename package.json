@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "basic test": "playwright test tests/ui/e2e-tests/basic-tests.spec.ts",
+    "basic tests": "playwright test tests/ui/e2e-tests/basic-tests.spec.ts",
+    "login tests": "playwright test tests/ui/e2e-tests/login-tests.spec.ts",
+    "switch env prod": "cross-env TEST_ENV=prod playwright test tests/ui/e2e-tests/cross-env-tests.spec.ts",
+    "switch env dev": "cross-env TEST_ENV=dev playwright test tests/ui/e2e-tests/cross-env-tests.spec.ts",
+
     "ui mode": "playwright test --ui",
     "report": "playwright show-report",
     "debug": "playwright test --debug",
@@ -18,6 +22,7 @@
     "@types/node": "^24.0.1"
   },
   "dependencies": {
+    "cross-env": "^7.0.3",
     "dotenv": "^16.5.0"
   }
 }

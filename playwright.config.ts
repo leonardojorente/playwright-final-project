@@ -29,11 +29,11 @@ export default defineConfig({
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
-    /* Base URL to use in actions like `await page.goto('/')`. */
-    // baseURL: 'http://localhost:3000',
-
-    /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'on-first-retry',
+    baseURL: 'https://barrigareact.wcaquino.me',
+    screenshot:'only-on-failure', 
+    //locale: 'it-IT', //it will effect navigator.language value, Accept-Language request header value
+    headless: true,
+    trace: 'retain-on-first-failure',
   },
 
   /* Configure projects for major browsers */
