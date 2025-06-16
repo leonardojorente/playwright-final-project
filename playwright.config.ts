@@ -29,7 +29,7 @@ export default defineConfig({
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
-    baseURL: 'https://barrigareact.wcaquino.me',
+    baseURL: process.env.BASE_URL_WEB!,
     screenshot:'only-on-failure', 
     //locale: 'it-IT', //it will effect navigator.language value, Accept-Language request header value
     headless: true,
