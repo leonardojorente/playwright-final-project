@@ -1,7 +1,6 @@
 import { type Locator, type Page } from '@playwright/test';
 
 export class AccountPage{
-    readonly page: Page;
     readonly accountNameInput: Locator;
     readonly saveAccountButton: Locator;
     readonly accountRowByAccountName: (accountName: string) => Locator;

@@ -1,10 +1,10 @@
-import { expect } from '@playwright/test';
+import { expect, Page } from '@playwright/test';
 import { test } from '../fixtures/pages-fixture';
 
 const userName = 'cypresstest@gmail.com'
 const password = 'cypress'
 
-async function getFullFillResponse(page) {
+async function getFullFillResponse(page: Page) {
     return page.waitForResponse(response =>
   response.url().includes('/signin') && response.status() === 200
       && response.request().method() === 'POST'

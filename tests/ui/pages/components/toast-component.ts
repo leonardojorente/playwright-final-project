@@ -1,7 +1,6 @@
 import { type Locator, type Page } from '@playwright/test';
 
 export class ToastComponent{
-    readonly page: Page;
     readonly toastContainer: Locator;
     readonly toastMessage: (toastMessage: string) => Locator;
 

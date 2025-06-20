@@ -1,3 +1,5 @@
+import { Page } from "@playwright/test";
+
 export const generateRandomString = (length: number) => {
     var result           = '';
     var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -10,7 +12,7 @@ export const generateRandomString = (length: number) => {
 }
 
 // Listen for all console events and handle errors
-export const logConsoleErrorMessages = (page) => {
+export const logConsoleErrorMessages = (page: Page) => {
     page.on('console', msg => {
         if (msg.type() === 'error')
             console.log(`CONSOLE LOG ERROR: "${msg.text()}"`);

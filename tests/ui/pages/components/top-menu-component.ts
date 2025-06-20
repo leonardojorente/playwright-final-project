@@ -1,9 +1,7 @@
 import { type Locator, type Page } from '@playwright/test';
 
 export class TopMenuComponent{
-    readonly page: Page;
     readonly settingsBtn: Locator;
-    readonly settingsMenu: Locator;
     readonly settingsDropDownOption: (settingsOption: string) => Locator;
 
     constructor(page: Page) {
