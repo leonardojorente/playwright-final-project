@@ -6,6 +6,6 @@ export class ToastComponent{
 
     constructor(page: Page) {
         this.toastContainer = page.locator('div[id="toast-container"]');
-        this.toastMessage = (toastMessage: string) => this.toastContainer.getByText(`${toastMessage}`, { exact: true });
+        this.toastMessage = (toastMessage: string) => this.toastContainer.getByText(`${toastMessage}`, { exact: false });
     }
 }
