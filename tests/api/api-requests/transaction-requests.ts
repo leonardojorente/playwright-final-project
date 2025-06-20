@@ -8,7 +8,7 @@ export class TransactionRequests{
         this.request = request;
     }
 
-    async createNewTransaction(body: any){
+    async createNewTransaction(body: object){
         const response = await this.request.post(`${process.env.BASE_URL_API}${RelativePath.TRANSACTION}`,
             {   
                 headers:{

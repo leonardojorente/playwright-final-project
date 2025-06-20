@@ -1,5 +1,6 @@
-import { test, expect } from '../fixtures/pages-fixture';
+import { expect } from '@playwright/test';
 import  labelMessage  from '../../data/label-messages.json';
+import { test } from '../fixtures/pages-fixture';
 import { generateRandomString } from '../../support/utils';
 
 test.beforeEach(async ({ page }) => {

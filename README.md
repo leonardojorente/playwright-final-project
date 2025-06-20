@@ -26,3 +26,5 @@ set lint:
     1-https://www.youtube.com/watch?v=3gT7LuzqOAk&list=PLMZDRUOi3a8NtMq3PUS5iJc2pee38rurc&index=16
     2-npm install --save-dev typescript
     3-npx tsc --init //generate the typecript config file
+    4-run tsc --noEmit //it will check typescript errors
+    5-npm install --save-dev eslint @eslint/js typescript-eslint

@@ -4,12 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "pre: TypeScript Validation": "tsc --noEmit",
-
+    "pre: TypeScript and eslint Validation": "tsc --noEmit && eslint tests/**",
 
     "ui: basic tests": "playwright test tests/ui/e2e-tests/basic-tests.spec.ts",
     "ui: login tests": "playwright test tests/ui/e2e-tests/login-tests.spec.ts",
     "ui: account tests": "playwright test tests/ui/e2e-tests/account-tests.spec.ts",
+    "ui: step and describe tests": "playwright test tests/ui/e2e-tests/step-and-describe-goo-practice-tests.spec.ts",
     "ui: switch env prod": "cross-env TEST_ENV=prod playwright test tests/ui/e2e-tests/cross-env-tests.spec.ts",
     "ui: switch env dev": "cross-env TEST_ENV=dev playwright test tests/ui/e2e-tests/cross-env-tests.spec.ts",
     "ui: response api check": "playwright test tests/ui/e2e-tests/api-respose-check-tests.spec.ts",
@@ -29,10 +29,13 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@eslint/js": "^9.29.0",
     "@playwright/test": "^1.53.0",
     "@types/node": "^24.0.1",
+    "eslint": "^9.29.0",
     "playwright-performance": "^2.0.4",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.34.1"
   },
   "dependencies": {
     "@axe-core/playwright": "^4.10.2",

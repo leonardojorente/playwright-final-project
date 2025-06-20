@@ -8,7 +8,7 @@ export class AccountRequests{
         this.request = request;
     }
 
-    async createNewAccount(body: any){
+    async createNewAccount(body: object){
         const response = await this.request.post(`${process.env.BASE_URL_API}${RelativePath.ACCOUNT}`,
             {
                 headers:{

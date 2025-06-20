@@ -8,7 +8,7 @@ export class LoginRequests{
         this.request = request;
     }
 
-    async doLogin(body: any){
+    async doLogin(body: object){
         const response = await this.request.post(`${process.env.BASE_URL_API}${RelativePath.LOGIN}`,
             {
                 data: body

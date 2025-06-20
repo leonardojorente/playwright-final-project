@@ -24,8 +24,13 @@ test.describe('Login API Tests', () => {
     expect(response.status()).toBe(200);
 
     const responseBody = await response.json();
-    
+
+    expect(responseBody).toMatchObject({
+      nome: "leonardo Jorente",
+      id: 24780
+    })
+
     expect(responseBody.nome).toBe("leonardo Jorente");
-    expect(responseBody.id).toBe("24780");
+    expect(responseBody.id).toBe(24780);
   });
 });

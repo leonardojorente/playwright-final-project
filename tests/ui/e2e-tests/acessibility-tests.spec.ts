@@ -1,5 +1,4 @@
-import { expect } from '@playwright/test';
-import { test } from '../fixtures/pages-fixture';
+import { test, expect } from '../fixtures/pages-fixture';
 import AxeBuilder from '@axe-core/playwright';
 
 // https://playwright.dev/docs/accessibility-testing
@@ -17,7 +16,7 @@ test('TC01 acessibility test', {tag: ['@regression', '@smoke']},  async ({ page 
 });
 
 //https://github.com/GoogleChrome/lighthouse/blob/main/core/gather/gatherers/accessibility.js
-https://www.youtube.com/watch?v=cs5-Kk9nQDA&list=PLMZDRUOi3a8NtMq3PUS5iJc2pee38rurc&index=23
+//https://www.youtube.com/watch?v=cs5-Kk9nQDA&list=PLMZDRUOi3a8NtMq3PUS5iJc2pee38rurc&index=23
 test('TC02 light house acessibility test', {tag: ['@regression', '@smoke']},  async ({ page }, testinfo) => {
   await test.step('Check acessibility with axe', async () => {
     const {violations} = await new AxeBuilder({ page })
