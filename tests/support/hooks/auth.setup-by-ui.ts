@@ -1,5 +1,4 @@
 import { test as setup, expect } from '../../ui/fixtures/pages-fixture';
-import  labelMessage  from '../../data/label-messages.json';
 
 //adm user
 const userName = process.env.USER!
@@ -11,7 +10,7 @@ setup('authenticate by UI', async ({ page, loginPage, toastComponent }) => {
     await loginPage.loginWebApp(userName, password);
   
     // Expect a toast to have the message
-    await expect(toastComponent.toastMessage(labelMessage.TOAST_COMPONENT.LOGIN_MESSAGE)).toBeVisible();
+    await expect(toastComponent.toastMessage(`Bem vindo, ${userName}!`)).toBeVisible();
 
     await page.context().storageState({ path: authenticatedUserPathFile });
 });

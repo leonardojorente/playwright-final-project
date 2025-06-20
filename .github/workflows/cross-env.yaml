@@ -31,9 +31,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Check eslint
+      - name: Check typescript
         run: npx tsc --noEmit
-      - run: npx eslint "tests/**"
+
+      - name: Check ESLint 
+        run: npx eslint "tests/**"
 
   e2e-tests:
     needs: pre-check
