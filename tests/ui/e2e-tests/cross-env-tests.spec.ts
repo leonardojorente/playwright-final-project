@@ -8,7 +8,7 @@ const password = process.env.PASSWORD!
 test.use({ storageState: { cookies: [], origins: [] } });
 
 test.beforeEach(async ({ page }) => {
-  await page.goto(process.env.BASE_URL_WEB!);
+  await page.goto('/');
 });
 
 test('TC01 Success Login Prod env', {tag: ['@regression', '@smoke']},  async ({ loginPage, toastComponent }) => {

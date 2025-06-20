@@ -4,10 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "basic tests": "playwright test tests/ui/e2e-tests/basic-tests.spec.ts",
-    "login tests": "playwright test tests/ui/e2e-tests/login-tests.spec.ts",
-    "switch env prod": "cross-env TEST_ENV=prod playwright test tests/ui/e2e-tests/cross-env-tests.spec.ts",
-    "switch env dev": "cross-env TEST_ENV=dev playwright test tests/ui/e2e-tests/cross-env-tests.spec.ts",
+    "ui: basic tests": "playwright test tests/ui/e2e-tests/basic-tests.spec.ts",
+    "ui: login tests": "playwright test tests/ui/e2e-tests/login-tests.spec.ts",
+    "ui: account tests": "playwright test tests/ui/e2e-tests/account-tests.spec.ts",
+    "ui: switch env prod": "cross-env TEST_ENV=prod playwright test tests/ui/e2e-tests/cross-env-tests.spec.ts",
+    "ui: switch env dev": "cross-env TEST_ENV=dev playwright test tests/ui/e2e-tests/cross-env-tests.spec.ts",
+    "ui: response api check": "playwright test tests/ui/e2e-tests/api-respose-check-tests.spec.ts",
+    "ui: acessibility check": "playwright test tests/ui/e2e-tests/acessibility-tests.spec.ts",
+    "ui: data driven": "playwright test tests/ui/e2e-tests/data-driven-tests.spec.ts",
+    "ui: serial test": "playwright test tests/ui/e2e-tests/serial-tests.spec.ts",
+
+    "api: login tests": "playwright test tests/ui/e2e-tests/serial-tests.spec.ts",
 
     "ui mode": "playwright test --ui",
     "report": "playwright show-report",
@@ -19,9 +26,12 @@
   "license": "ISC",
   "devDependencies": {
     "@playwright/test": "^1.53.0",
-    "@types/node": "^24.0.1"
+    "@types/node": "^24.0.1",
+    "playwright-performance": "^2.0.4"
   },
   "dependencies": {
+    "@axe-core/playwright": "^4.10.2",
+    "ajv": "^7.0.4",
     "cross-env": "^7.0.3",
     "dotenv": "^16.5.0"
   }

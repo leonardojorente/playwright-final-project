@@ -1,5 +1,5 @@
 import { expect } from '@playwright/test';
-import  labelMessageToastComponent from '../../data/label-messages/components/toast-component.json';
+import  labelMessage from '../../data/label-messages.json';
 import { test } from '../fixtures/pages-fixture';
 
 const userName = 'cypresstest@gmail.com'
@@ -19,5 +19,5 @@ test('TC01 Success Login', {tag: ['@regression', '@smoke']},  async ({ loginPage
   await loginPage.clickSignInButton()
 
   // Expect a toast to have the message
-  await expect(toastComponent.toastMessage(labelMessageToastComponent.TOAST_COMPONENT.LOGIN_MESSAGE)).toBeVisible();
+  await expect(toastComponent.toastMessage(labelMessage.TOAST_COMPONENT.LOGIN_MESSAGE)).toBeVisible();
 });

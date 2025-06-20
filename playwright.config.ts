@@ -16,6 +16,8 @@ dotenv.config({
 });
 
 export default defineConfig({
+  globalSetup: './tests/support/global-setup.ts',
+  globalTeardown: './tests/support/global-teardown.ts',
   testDir: './tests',
   /* Run tests in files in parallel */
   fullyParallel: true,
@@ -38,9 +40,16 @@ export default defineConfig({
 
   /* Configure projects for major browsers */
   projects: [
+    // Setup project
+    { name: 'setup-by-ui', testMatch: '**/*.setup-by-ui.ts' },
+    
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: { ...devices['Desktop Chrome'],
+        storageState: '.auth/authenticated-user.json',
+       },
+      
+      dependencies: ['setup-by-ui'], // Ensure setup is done before running tests
     },
 
     /* Test against mobile viewports. */

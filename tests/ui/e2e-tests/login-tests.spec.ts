@@ -1,7 +1,6 @@
 import { expect } from '@playwright/test';
 import { test } from '../fixtures/pages-fixture';
-import  labelMessageToastComponent from '../../data/label-messages/components/toast-component.json';
-import  labelMessageTopMenuComponent from '../../data/label-messages/components/top-menu-component.json';
+import  labelMessage from '../../data/label-messages.json';
 
 const userName = process.env.USER!
 const password = process.env.PASSWORD!
@@ -22,15 +21,15 @@ test('TC01 Success Login', {tag: ['@regression', '@smoke']},  async ({ loginPage
 console.log(1000)
 
   // Expect a toast to have the message
-  await expect(toastComponent.toastMessage(labelMessageToastComponent.TOAST_COMPONENT.LOGIN_MESSAGE)).toBeVisible();
+  await expect(toastComponent.toastMessage(labelMessage.TOAST_COMPONENT.LOGIN_MESSAGE)).toBeVisible();
 });
 
 test('TC02 Success Logout', {tag: '@regression'}, async ({ loginPage, toastComponent, topMenuComponent }) => {
   await loginPage.loginWebApp(userName, password);
-  await topMenuComponent.clickSettingsOption(labelMessageTopMenuComponent.TOP_MENU_COMPONENT.SETTINGS_OPTION_LOGOUT);
+  await topMenuComponent.clickSettingsOption(labelMessage.TOP_MENU_COMPONENT.SETTINGS_OPTION_LOGOUT);
 
   // Expect a toast to have the message
-  await expect(toastComponent.toastMessage(labelMessageToastComponent.TOAST_COMPONENT.LOGOUT_MESSAGE)).toBeVisible();
+  await expect(toastComponent.toastMessage(labelMessage.TOAST_COMPONENT.LOGOUT_MESSAGE)).toBeVisible();
 });
 
 test('TC03 Fail Login', {tag: ['@regression', '@smoke', '@error']},  async ({ loginPage, toastComponent }) => {
@@ -39,5 +38,5 @@ test('TC03 Fail Login', {tag: ['@regression', '@smoke', '@error']},  async ({ lo
   await loginPage.clickSignInButton()
 
   // Expect a toast to have the message
-  await expect(toastComponent.toastMessage(labelMessageToastComponent.TOAST_COMPONENT.LOGIN_MESSAGE)).toBeVisible();
+  await expect(toastComponent.toastMessage(labelMessage.TOAST_COMPONENT.LOGIN_MESSAGE)).toBeVisible();
 });
