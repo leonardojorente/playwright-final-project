@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 import  LoginPayload  from '../../data/request-payloads/post-signin-payload.json';
 import { LoginRequests } from '../api-requests/login-requests';
+import loginSchema from '../../data/JSON-schemas/login-schema.json';
 import Ajv from 'ajv';
 
 LoginPayload.email = process.env.USER!;
@@ -20,7 +21,7 @@ test.describe('Login API Tests', () => {
       expect(response.status()).toBe(200);
       const responseBody = await response.json();
 	    // Validate the response against the schema file
-      const isValid = ajv.validate('../../data/JSON-schemas/login-schema.json', responseBody);
+      const isValid = ajv.validate(loginSchema, responseBody);
 	    // Output the errors text
       if (!isValid) {
         console.error('AJV Validation Errors:', ajv.errorsText());

@@ -16,4 +16,16 @@ test.describe('Login API Tests', () => {
     const responseBody = await response.json();
     expect(responseBody.nome).toBe("leonardo Jorente");
   });
+
+  test('TC02 Success Login by API - assert using object - better', {tag: ['@regression', '@api']},  async ({ request }) => {
+    const loginRequests = new LoginRequests(request)
+
+    const response = await loginRequests.doLogin(LoginPayload)
+    expect(response.status()).toBe(200);
+
+    const responseBody = await response.json();
+    
+    expect(responseBody.nome).toBe("leonardo Jorente");
+    expect(responseBody.id).toBe("24780");
+  });
 });

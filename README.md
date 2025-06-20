@@ -17,6 +17,12 @@ Set acessibility tests
 
 set performance response time tests
     1-npm install playwright-performance --save-dev
+    2-check the api fixture and the respective time response test
 
 set json schema validator ajv
-    1-npm i ajv@7.0.4    
+    1-npm i ajv@7.0.4
+
+set lint:
+    1-https://www.youtube.com/watch?v=3gT7LuzqOAk&list=PLMZDRUOi3a8NtMq3PUS5iJc2pee38rurc&index=16
+    2-npm install --save-dev typescript
+    3-npx tsc --init //generate the typecript config file
