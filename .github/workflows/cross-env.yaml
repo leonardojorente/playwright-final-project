@@ -28,7 +28,7 @@ jobs:
         run: npm ci
 
       - name: Check eslint
-        run: npx tsc --noEmit
+        run: npx tsc --noEmit && eslint "tests/**"
 
   e2e-tests:
     needs: pre-check
