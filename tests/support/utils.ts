@@ -12,9 +12,13 @@ export const generateRandomString = (length: number) => {
 }
 
 // Listen for all console events and handle errors
-export const logConsoleErrorMessages = (page: Page) => {
+export const logConsoleErrorMessages = (page: Page, interruptTest: boolean) => {
     page.on('console', msg => {
-        if (msg.type() === 'error')
-            console.log(`CONSOLE LOG ERROR: "${msg.text()}"`);
+        if (msg.type() === 'error' && interruptTest) {
+            throw new Error(`Console error detected: ${msg.text()}`);
+        }
+        if (msg.type() === 'error' && !interruptTest) {
+            console.log(`CONSOLE LOG ERROR: "${msg.text()}"`); 
+        }
     });
 }

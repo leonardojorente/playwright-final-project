@@ -1,6 +1,5 @@
-import { expect } from '@playwright/test';
+import { expect, test } from '../fixtures/pages-fixture';
 import  labelMessage from '../../data/label-messages.json';
-import { test } from '../fixtures/pages-fixture';
 
 const userName = 'cypresstest@gmail.com'
 const password = 'cypress'

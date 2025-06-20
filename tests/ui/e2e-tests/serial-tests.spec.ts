@@ -1,6 +1,5 @@
-import { expect } from '@playwright/test';
+import { expect, test } from '../fixtures/pages-fixture';
 import  labelMessage from '../../data/label-messages.json';
-import { test } from '../fixtures/pages-fixture';
 
 const userName = 'cypresstest@gmail.com'
 const password = 'cypress'
@@ -11,8 +10,6 @@ test.use({ storageState: { cookies: [], origins: [] } });
 test.beforeEach(async ({ page }) => {
   await page.goto('https://barrigareact.wcaquino.me');
 });
-
-
 
 test.describe('runs in parallel with other describes', () => {
   test.describe.configure({ mode: 'default' });

@@ -18,7 +18,14 @@ jobs:
       - name: Send greeting
         run: echo "input environment selected -> ${{ github.event.inputs.environment }}"
 
+  pre-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check eslint
+        run: npx tsc --noEmit && eslint tests/**
+
   e2e-tests:
+    needs: pre-check
     runs-on: ubuntu-latest
     environment: ${{ github.event.inputs.environment }}
     container:

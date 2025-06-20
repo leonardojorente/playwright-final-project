@@ -1,5 +1,4 @@
-import { expect } from '@playwright/test';
-import { test } from '../fixtures/pages-fixture';
+import { expect, test } from '../fixtures/pages-fixture';
 
 const userName = process.env.USER!
 const password = process.env.PASSWORD!

@@ -16,8 +16,9 @@
     "ui: acessibility check": "playwright test tests/ui/e2e-tests/acessibility-tests.spec.ts",
     "ui: data driven": "playwright test tests/ui/e2e-tests/data-driven-tests.spec.ts",
     "ui: serial test": "playwright test tests/ui/e2e-tests/serial-tests.spec.ts",
-    "ui: broken links test": "playwright test tests/ui/e2e-tests/broken-link-tests.spec.ts",
-    "api: login tests": "playwright test tests/api/api-tests/login-collection-tests.spec.ts",
+    "ui: tag and jSError handle test": "playwright test tests/ui/e2e-tests --grep @error",
+     
+    "api: login tests -exampleOfAssertionForAPI": "playwright test tests/api/api-tests/login-collection-tests.spec.ts",
     "api: json schema": "playwright test tests/api/api-tests/json-schema-validation-tests.spec.ts",
     "api: response time": "playwright test tests/api/api-tests/response-time-validation-tests.spec.ts",
     "ui mode": "playwright test --ui",
