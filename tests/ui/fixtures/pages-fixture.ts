@@ -1,4 +1,4 @@
-import { test as base, Page } from '@playwright/test';
+import { test as base } from '@playwright/test';
 import { LoginPage } from '../pages/login-page';
 import { AccountPage } from '../pages/account-page';
 import { ToastComponent } from '../pages/components/toast-component';
