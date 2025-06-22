@@ -1,5 +1,5 @@
 import { APIRequestContext } from '@playwright/test';
-import  RelativePath  from '../../data/endpoint-relative-path.json';
+import  RelativePath  from '@tests/data/endpoint-relative-path.json';
 
 export class TransactionRequests{
     readonly request: APIRequestContext;

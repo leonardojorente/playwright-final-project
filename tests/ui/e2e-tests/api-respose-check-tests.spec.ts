@@ -1,5 +1,5 @@
 import { Page } from '@playwright/test';
-import { test, expect } from '../fixtures/pages-fixture';
+import { test, expect } from '@tests/ui/fixtures/pages-fixture';
 
 const userName = 'cypresstest@gmail.com'
 const password = 'cypress'

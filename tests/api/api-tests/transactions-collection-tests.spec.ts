@@ -1,10 +1,9 @@
-import { expect } from '@playwright/test';
-import { test } from '../fixtures/requests-fixture';
-import { generateRandomString } from '../../support/utils';
-import  TransactionPayload  from '../../data/request-payloads/post-transacoes-payload.json';
-import { TransactionRequests } from '../api-requests/transaction-requests';
-import  AccountPayload  from '../../data/request-payloads/post-contas-payload.json';
-import { AccountRequests } from '../api-requests/account-requests';
+import { test, expect } from '@tests/api/fixtures/requests-fixture';
+import { generateRandomString } from '@tests/support/utils';
+import  TransactionPayload  from '@tests/data/request-payloads/post-transacoes-payload.json';
+import { TransactionRequests } from '@tests/api/api-requests/transaction-requests';
+import  AccountPayload  from '@tests/data/request-payloads/post-contas-payload.json';
+import { AccountRequests } from '@tests/api/api-requests/account-requests';
 
 let accountId: number;
 

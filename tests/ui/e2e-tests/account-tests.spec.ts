@@ -1,6 +1,6 @@
-import { test, expect } from '../fixtures/pages-fixture';
-import  labelMessage  from '../../data/label-messages.json';
-import { generateRandomString } from '../../support/utils';
+import { test, expect } from '@tests/ui/fixtures/pages-fixture';
+import  labelMessage  from '@tests/data/label-messages.json';
+import { generateRandomString } from '@tests/support/utils';
 
 test.beforeEach(async ({ page }) => {
   await page.goto('/');

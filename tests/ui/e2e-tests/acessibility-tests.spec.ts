@@ -1,4 +1,4 @@
-import { test, expect } from '../fixtures/pages-fixture';
+import { test, expect } from '@tests/ui/fixtures/pages-fixture';
 import AxeBuilder from '@axe-core/playwright';
 
 // https://playwright.dev/docs/accessibility-testing

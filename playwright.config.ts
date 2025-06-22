@@ -42,7 +42,7 @@ export default defineConfig({
   projects: [
     // Setup project
     { name: 'setup-by-ui', testMatch: '**/*.setup-by-ui.ts' },
-    
+
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'],

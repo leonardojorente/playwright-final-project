@@ -1,9 +1,9 @@
 import { test as base } from '@playwright/test';
-import { LoginPage } from '../pages/login-page';
-import { AccountPage } from '../pages/account-page';
-import { ToastComponent } from '../pages/components/toast-component';
-import { TopMenuComponent } from '../pages/components/top-menu-component';
-import { logConsoleErrorMessages } from '../../support/utils';
+import { LoginPage } from '@tests/ui/pages/login-page';
+import { AccountPage } from '@tests/ui/pages/account-page';
+import { ToastComponent } from '@tests/ui/pages/components/toast-component';
+import { TopMenuComponent } from '@tests/ui/pages/components/top-menu-component';
+import { logConsoleErrorMessages } from '@tests/support/utils';
 
 type PagesFixtures = {
   loginPage: LoginPage;

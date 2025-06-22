@@ -1,5 +1,5 @@
-import { test as teardown, expect } from '../../ui/fixtures/pages-fixture';
-import { ResetRequests } from '../../api/api-requests/reset-requests';
+import { test as teardown, expect } from '@tests/ui/fixtures/pages-fixture';
+import { ResetRequests } from '@tests/api/api-requests/reset-requests';
 
 teardown('reset app using API', async ({ request }) => {
   console.log('reseting app using API...');

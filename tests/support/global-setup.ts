@@ -1,6 +1,6 @@
 import { request as playwrightRequest } from '@playwright/test';
-import  LoginPayload  from '../data/request-payloads/post-signin-payload.json';
-import { LoginRequests } from '../api/api-requests/login-requests';
+import  LoginPayload  from '@tests/data/request-payloads/post-signin-payload.json';
+import { LoginRequests } from '@tests/api/api-requests/login-requests';
 
 //adm user
 LoginPayload.email = process.env.USER!;

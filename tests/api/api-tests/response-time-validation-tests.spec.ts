@@ -1,6 +1,6 @@
-import { test, expect } from '../fixtures/requests-fixture';
-import  LoginPayload  from '../../data/request-payloads/post-signin-payload.json';
-import { LoginRequests } from '../api-requests/login-requests';
+import { test, expect } from '@tests/api/fixtures/requests-fixture';
+import  LoginPayload  from '@tests/data/request-payloads/post-signin-payload.json';
+import { LoginRequests } from '@tests/api/api-requests/login-requests';
 
 LoginPayload.email = process.env.USER!;
 LoginPayload.senha = process.env.PASSWORD!;

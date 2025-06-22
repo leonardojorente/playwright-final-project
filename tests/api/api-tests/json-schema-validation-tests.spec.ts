@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
-import  LoginPayload  from '../../data/request-payloads/post-signin-payload.json';
-import { LoginRequests } from '../api-requests/login-requests';
-import loginSchema from '../../data/JSON-schemas/login-schema.json';
+import  LoginPayload  from '@tests/data/request-payloads/post-signin-payload.json';
+import { LoginRequests } from '@tests/api/api-requests/login-requests';
+import loginSchema from '@tests/data/JSON-schemas/login-schema.json';
 import Ajv from 'ajv';
 
 LoginPayload.email = process.env.USER!;

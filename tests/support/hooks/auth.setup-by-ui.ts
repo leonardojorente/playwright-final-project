@@ -1,4 +1,4 @@
-import { test as setup, expect } from '../../ui/fixtures/pages-fixture';
+import { test as setup, expect } from '@tests/ui/fixtures/pages-fixture';
 
 //adm user
 const userName = process.env.USER!

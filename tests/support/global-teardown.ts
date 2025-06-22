@@ -1,5 +1,5 @@
 import { request as playwrightRequest } from '@playwright/test';
-import { ResetRequests } from '../api/api-requests/reset-requests';
+import { ResetRequests } from '@tests/api/api-requests/reset-requests';
 
 async function globalTeardown() {
    const request = await playwrightRequest.newContext();

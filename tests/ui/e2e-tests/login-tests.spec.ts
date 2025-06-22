@@ -1,5 +1,5 @@
-import { expect, test } from '../fixtures/pages-fixture';
-import  labelMessage from '../../data/label-messages.json';
+import { expect, test } from '@tests/ui/fixtures/pages-fixture';
+import  labelMessage from '@tests/data/label-messages.json';
 
 const userName = process.env.USER!
 const password = process.env.PASSWORD!
