@@ -1,6 +1,8 @@
 #1-https://dev.azure.com/
 #2-Search "azure devops organization" and create it or enter an existing one
-#3-Create a new project or enter an existing one
+#3- organization policy -> enable public projects
+#4-Create a new project or enter an existing one
+#5-project settings -> change project to public
 #4-pipelines -> New pipeline -> github -> select the repository -> Configure your pipeline -> existing azure-pipelines.yml
 
 name: Basic E2E Tests
