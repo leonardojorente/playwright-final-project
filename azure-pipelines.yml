@@ -11,7 +11,7 @@ jobs:
 - job: e2e_tests
   displayName: Run E2E Tests
   pool:
-    vmImage: 'ubuntu-latest'
+    vmImage: 'ubuntu-20.04' #free ubuntu image available for Azure DevOps
   
   steps:
   - checkout: self
