@@ -1,0 +1,32 @@
+#1-https://dev.azure.com/
+#2-Search "azure devops organization" and create it or enter an existing one
+#3-Create a new project or enter an existing one
+#4-pipelines -> New pipeline -> github -> select the repository -> Configure your pipeline -> existing azure-pipelines.yml
+
+name: Basic E2E Tests
+
+trigger: none  # Manual trigger only (equivalent to workflow_dispatch)
+
+jobs:
+- job: e2e_tests
+  displayName: Run E2E Tests
+  pool:
+    vmImage: 'ubuntu-latest'
+  
+  steps:
+  - checkout: self
+    displayName: 'Checkout code'
+
+  - task: NodeTool@0
+    displayName: 'Setup Node.js'
+    inputs:
+      versionSpec: '22.x'
+
+  - script: npm ci
+    displayName: 'Install dependencies'
+
+  - script: npx playwright install --with-deps
+    displayName: 'Install Playwright Browsers'
+
+  - script: npx playwright test tests/ui/e2e-tests/basic-tests.spec.ts
+    displayName: 'Run Playwright tests'
