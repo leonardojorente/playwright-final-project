@@ -1,4 +1,4 @@
-name: 'Cross Env E2E Tests'
+name: 'E2E Tests'
 #https://github.blog/changelog/2021-11-10-github-actions-input-types-for-manual-workflows/
 on:
   workflow_dispatch:
@@ -83,6 +83,7 @@ jobs:
         #https://github.com/actions/deploy-pages
         #https://github.com/leonardojorente/playwright-final-project/settings/pages -> enable pages on github
       - uses: actions/configure-pages@v5 # upload test results
+        if: ${{ always() }}
 
       - uses: actions/upload-pages-artifact@v3
         with:
