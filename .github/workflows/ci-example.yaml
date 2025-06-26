@@ -72,3 +72,22 @@ jobs:
           PASSWORD: ${{ secrets.PASSWORD }}
           BASE_URL_WEB: ${{ vars.BASE_URL_WEB }} 
           BASE_URL_API: ${{ vars.BASE_URL_API }}
+
+      - uses: actions/upload-artifact@v4 # upload test results
+        if: ${{ always() }}
+        with:
+          name: test-results
+          path: playwright-report/
+
+        # Deploy to GitHub Pages
+        #https://github.com/actions/deploy-pages
+        #https://github.com/leonardojorente/playwright-final-project/settings/pages -> enable pages on github
+      - uses: actions/configure-pages@v5 # upload test results
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: playwright-report/
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
