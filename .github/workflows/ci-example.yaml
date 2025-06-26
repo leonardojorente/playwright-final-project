@@ -38,6 +38,10 @@ jobs:
         run: npx eslint "tests/**"
 
   e2e-tests:
+    permissions:
+      pages: write
+      id-token: write
+
     needs: pre-check
     runs-on: ubuntu-latest
     environment: ${{ github.event.inputs.environment }}
