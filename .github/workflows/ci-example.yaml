@@ -86,9 +86,11 @@ jobs:
         if: ${{ always() }}
 
       - uses: actions/upload-pages-artifact@v3
+        if: ${{ always() }}
         with:
           path: playwright-report/
 
       - name: Deploy to GitHub Pages
+        if: ${{ always() }}
         id: deployment
         uses: actions/deploy-pages@v4
