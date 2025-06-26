@@ -38,10 +38,6 @@ jobs:
         run: npx eslint "tests/**"
 
   e2e-tests:
-    permissions:
-      pages: write
-      id-token: write
-
     needs: pre-check
     runs-on: ubuntu-latest
     environment: ${{ github.event.inputs.environment }}
@@ -82,19 +78,3 @@ jobs:
         with:
           name: test-results
           path: playwright-report/
-
-        # Deploy to GitHub Pages
-        #https://github.com/actions/deploy-pages
-        #https://github.com/leonardojorente/playwright-final-project/settings/pages -> enable pages on github
-      - uses: actions/configure-pages@v5 # upload test results
-        if: ${{ always() }}
-
-      - uses: actions/upload-pages-artifact@v3
-        if: ${{ always() }}
-        with:
-          path: playwright-report/
-
-      - name: Deploy to GitHub Pages
-        if: ${{ always() }}
-        id: deployment
-        uses: actions/deploy-pages@v4
