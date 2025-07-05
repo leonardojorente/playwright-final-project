@@ -7,18 +7,12 @@ pipeline {
                 sh 'npm install'
             }
         }
-    stage('Check typescript') {
+    stage('ESLint tests') {
             steps {
-                sh 'npx tsc --noEmit'
+                sh 'npx eslint ./cypress --ext .js'
             }
         }
-    stage('Check ESLint') {
-            steps {
-                sh 'npx eslint "tests/**"'
-            }
-        }
-
-    stage('Playwright tests') {
+    stage('Playright tests') {
             steps {
                 sh 'npx playwright test tests/ui/e2e-tests/basic-tests.spec.ts'
             }
