@@ -2,21 +2,27 @@ pipeline {
     agent { // where the pipeline will run
         docker {
             image 'mcr.microsoft.com/playwright:v1.53.0-noble'
+            args '-u root'  // execute as root
         }
     }
 
     stages {
+        stage('Check docker host') {
+            steps {
+                echo "Docker host: ${env.NODE_NAME}"
+            }
+        }
         stage('Install dependencies') {
             steps {
                 sh 'npm install'
             }
         }
-    stage('ESLint tests') {
+        stage('ESLint tests') {
             steps {
                 sh 'npx eslint ./cypress --ext .js'
             }
         }
-    stage('Playright tests') {
+        stage('Playright tests') {
             steps {
                 sh 'npx playwright test tests/ui/e2e-tests/basic-tests.spec.ts'
             }

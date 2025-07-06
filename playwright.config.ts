@@ -28,11 +28,13 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
+  //reporter: 'html',
+  reporter: 'allure-playwright',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     baseURL: process.env.BASE_URL_WEB!,
-    screenshot:'only-on-failure', 
+    screenshot:'only-on-failure',
+    video: 'off', 
     //locale: 'it-IT', //it will effect navigator.language value, Accept-Language request header value
     headless: true,
     trace: 'retain-on-first-failure',
