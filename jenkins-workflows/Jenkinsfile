@@ -1,9 +1,10 @@
 pipeline {
-    agent { // where the pipeline will run
-        docker {
-            image 'mcr.microsoft.com/playwright:v1.53.0-noble'
-        }
-    }
+    // agent { // where the pipeline will run
+    //     docker {
+    //         image 'mcr.microsoft.com/playwright:v1.53.0-noble'
+    //     }
+    // }
+    agent any // Use any available agent
 
     // parameters {
     //     choice(
