@@ -30,13 +30,15 @@ pipeline {
 
 
     stages {
-        stage('Print env variables) {
+        stage('Print env variables') {
             steps {
-                sh 'echo "Using custom VAR: ${params.ENVIRONMENT}"'
-                sh 'echo "BASE_URL_API: ${env.BASE_URL_API}"'
-                sh 'echo "BASE_URL_WEB: ${env.BASE_URL_WEB}"'
-                sh 'echo "USER: ${env.USER}"'
-                sh 'echo "PASSWORD: ${env.PASSWORD}"'
+                script {
+                    echo "Using custom VAR: ${params.ENVIRONMENT}"
+                    echo "BASE_URL_API: ${env.BASE_URL_API}"
+                    echo "BASE_URL_WEB: ${env.BASE_URL_WEB}"
+                    echo "USER: ${env.USER}"
+                    echo "PASSWORD: ${env.PASSWORD}"
+                }
             }
         }
         stage('Install dependencies') {
