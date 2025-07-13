@@ -1,0 +1,58 @@
+pipeline {
+    agent { // where the pipeline will run
+        docker {
+            image 'mcr.microsoft.com/playwright:v1.53.0-noble'
+        }
+    }
+
+    parameters {
+        choice(
+            name: 'ENVIRONMENT',
+            choices: ['dev', 'prod'],
+            description: 'Select environment'
+        )
+    }
+
+    environment {
+        BASE_URL_WEB = "https://barrigareact.wcaquino.me"
+        BASE_URL_API = "https://barrigarest.wcaquino.me"
+        USER = credentials(
+            params.ENVIRONMENT == 'dev' ? 'user_dev' : 
+            params.ENVIRONMENT == 'prod' ? 'user_prod' : 
+            ''
+        )
+        PASSWORD = credentials(
+            params.ENVIRONMENT == 'dev' ? 'password_dev' : 
+            params.ENVIRONMENT == 'prod' ? 'password_prod' : 
+            ''
+        )
+    }
+
+
+    stages {
+        stage('Print env variables) {
+            steps {
+                sh 'echo "Using custom VAR: ${params.ENVIRONMENT}"'
+                sh 'echo "BASE_URL_API: ${env.BASE_URL_API}"'
+                sh 'echo "BASE_URL_WEB: ${env.BASE_URL_WEB}"'
+                sh 'echo "USER: ${env.USER}"'
+                sh 'echo "PASSWORD: ${env.PASSWORD}"'
+            }
+        }
+        stage('Install dependencies') {
+            steps {
+                sh 'npm install'
+            }
+        }
+        stage('ESLint tests') {
+            steps {
+                sh 'npx eslint ./cypress --ext .js'
+            }
+        }
+        stage('Playright tests') {
+            steps {
+                sh 'npx playwright test tests/ui/e2e-tests/cross-env-tests.spec.ts'
+            }
+        }
+    }
+}
