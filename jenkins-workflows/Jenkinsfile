@@ -34,6 +34,22 @@ pipeline {
                     echo "PASSWORD: ${env.PASSWORD}"
                 }
             }
+        stage('Install Node.js') {
+            steps {
+                script {
+                    // Install Node.js and npm (Linux/macOS)
+                    sh '''
+                        curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+                        sudo apt-get install -y nodejs
+                        node --version  # Verify
+                        npm --version
+                    '''
+            
+                // Alternative for Windows agents:
+                // bat 'choco install nodejs --version=20.9.0 -y'
+        }
+    }
+}    
         }
         stage('Install dependencies') {
             steps {
