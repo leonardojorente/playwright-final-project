@@ -23,6 +23,13 @@ pipeline {
 
     stages {
 
+        stage('Verify jenkins user') {
+            steps {
+                echo "Jenkins user: ${env.JENKINS_USER}"
+                sh 'whoami' // Verify the Jenkins user
+            }
+        }
+
         stage('Print env variables') {
             steps {
                 script {
