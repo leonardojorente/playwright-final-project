@@ -21,7 +21,6 @@ pipeline {
         PASSWORD = credentials("password_${params.ENVIRONMENT}")
     }
 
-
     stages {
 
         stage('Print env variables') {
@@ -34,6 +33,8 @@ pipeline {
                     echo "PASSWORD: ${env.PASSWORD}"
                 }
             }
+        }
+
         stage('Install Node.js') {
             steps {
                 script {
@@ -44,23 +45,22 @@ pipeline {
                         node --version  # Verify
                         npm --version
                     '''
-            
-                // Alternative for Windows agents:
-                // bat 'choco install nodejs --version=20.9.0 -y'
-        }
-    }
-}    
-        }
+               }
+            }
+        }    
+
         stage('Install dependencies') {
             steps {
                 sh 'npm install'
             }
         }
+
         stage('ESLint tests') {
             steps {
                 sh 'npx eslint ./cypress --ext .js'
             }
         }
+
         stage('Playright tests') {
             steps {
                 sh 'npx playwright test tests/ui/e2e-tests/cross-env-tests.spec.ts'
