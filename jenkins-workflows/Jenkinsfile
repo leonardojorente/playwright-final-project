@@ -17,31 +17,12 @@ pipeline {
     environment {
         BASE_URL_WEB = "https://barrigareact.wcaquino.me"
         BASE_URL_API = "https://barrigarest.wcaquino.me"
-        USER = ''
-        PASSWORD = ''
+        USER = credentials("user_${params.ENVIRONMENT}")
+        PASSWORD = credentials("password_${params.ENVIRONMENT}")
     }
 
 
     stages {
-        stage('Initialize credentials') {
-            steps {
-                script {
-                    echo "enviroment choice: ${params.ENVIRONMENT}"
-                    // Determine credential IDs based on selected environment
-                    def userCredId = params.ENVIRONMENT == 'dev' ? 'user_dev' : 'user_prod'
-                    def passCredId = params.ENVIRONMENT == 'dev' ? 'password_dev' : 'password_prod'
-
-                    // Load credentials securely
-                    withCredentials([
-                        usernamePassword(credentialsId: userCredId, usernameVariable: 'USERNAME', passwordVariable: 'USER_PASSWORD'),
-                        usernamePassword(credentialsId: passCredId, usernameVariable: 'PASSWORD_USERNAME', passwordVariable: 'PASSWORD')
-                    ]) {
-                        env.USER = USERNAME
-                        env.PASSWORD = PASSWORD
-                    }
-                }
-            }
-        }
 
         stage('Print env variables') {
             steps {
