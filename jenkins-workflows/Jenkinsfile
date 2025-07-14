@@ -6,14 +6,6 @@ pipeline {
     // }
     agent any // Use any available agent
 
-    // parameters {
-    //     choice(
-    //         name: 'ENVIRONMENT',
-    //         choices: ['dev', 'prod'],
-    //         description: 'Select environment'
-    //     )
-    // }
-
     environment {
         BASE_URL_WEB = "https://barrigareact.wcaquino.me"
         BASE_URL_API = "https://barrigarest.wcaquino.me"
@@ -22,13 +14,6 @@ pipeline {
     }
 
     stages {
-
-        stage('Verify jenkins user') {
-            steps {
-                echo "Jenkins user: ${env.JENKINS_USER}"
-                sh 'whoami' // Verify the Jenkins user
-            }
-        }
 
         stage('Print env variables') {
             steps {
@@ -41,20 +26,6 @@ pipeline {
                 }
             }
         }
-
-        stage('Install Node.js') {
-            steps {
-                script {
-                    // Install Node.js and npm (Linux/macOS)
-                    sh '''
-                        curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
-                        sudo apt-get install -y nodejs
-                        node --version  # Verify
-                        npm --version
-                    '''
-               }
-            }
-        }    
 
         stage('Install dependencies') {
             steps {
