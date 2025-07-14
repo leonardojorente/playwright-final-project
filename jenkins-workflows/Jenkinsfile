@@ -33,9 +33,17 @@ pipeline {
             }
         }
 
-        stage('ESLint tests') {
+        stage('Static code analysis') {
             steps {
-                sh 'npx eslint ./cypress --ext .js'
+                script{
+                    // TypeScript type checking
+                    echo "Running TypeScript type checking..."
+                    sh 'npx tsc --noEmit'
+            
+                    // ESLint checking
+                    echo "Running ESLint checks..."
+                    sh 'npx eslint "tests/**"'
+                }
             }
         }
 
