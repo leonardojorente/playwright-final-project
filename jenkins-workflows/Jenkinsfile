@@ -68,7 +68,7 @@ pipeline {
 
         stage('Playright tests') {
             steps {
-                sh 'npx playwright test tests/ui/e2e-tests/cross-env-tests.spec.ts --headless'
+                sh 'npx playwright test tests/ui/e2e-tests/cross-env-tests.spec.ts'
                 allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
             }
         }
