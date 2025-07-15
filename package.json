@@ -21,6 +21,7 @@
     "api-response-time": "playwright test tests/api/api-tests/response-time-validation-tests.spec.ts",
     "ui-mode": "playwright test --ui",
     "report": "playwright show-report",
+    "allure report": "allure serve",
     "debug": "playwright test --debug",
     "codegen": "playwright codegen"
   },
