@@ -60,7 +60,7 @@ pipeline {
 
         stage('Install Playwright Browsers') {
             steps {
-                sh 'npx playwright install --with-deps chromium'
+                sh 'npx playwright install'
                 // OR for only chrome:
                 // sh 'npx playwright install --with-deps chromium'   // Installs only Chromium (faster), but needs to use apt get with sudo behind, it would be a problem in Jenkins
             }
