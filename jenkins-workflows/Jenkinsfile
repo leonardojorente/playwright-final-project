@@ -2,9 +2,20 @@ pipeline {
     // agent { // where the pipeline will run
     //     docker {
     //         image 'mcr.microsoft.com/playwright:v1.53.0-noble'
+    //         args '-u root' // run as root user, so it can install the browsers
+    //         label 'playwright' // use the label of the machine on jenkins to run playwright tests
+    //         reuseNode true // reuse the node, so it doesn't create a new container for each stage
     //     }
     // }
-    agent any // Use any available agent
+    agent any // Use any available agent, use  the label o the machine on jenkins to run playwright tests
+
+    parameters {
+        choice(
+            name: 'ENVIRONMENT', 
+            choices: ['dev', 'hml', 'prod'], 
+            description: 'Select the environment to run the tests'
+        )
+    }
 
     environment {
         BASE_URL_WEB = "https://barrigareact.wcaquino.me"
