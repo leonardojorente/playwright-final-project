@@ -58,6 +58,12 @@ jobs:
       # Run Playwright tests  
       - name: Run Playwright tests
         run: npx playwright test tests/ui/e2e-tests/basic-tests.spec.ts
+        env:
+          USER:  ${{ vars.USER }}
+          PASSWORD: ${{ secrets.PASSWORD }}
+          BASE_URL_WEB: ${{ vars.BASE_URL_WEB }} 
+          BASE_URL_API: ${{ vars.BASE_URL_API }}
+          ENVIRONMENT: ${{ github.event.inputs.environment }}  
 
       # upload html report results
       - uses: actions/upload-artifact@v4
