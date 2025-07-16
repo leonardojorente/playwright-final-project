@@ -26,7 +26,7 @@ jobs:
       PASSWORD: ${{ secrets.PASSWORD }}
       BASE_URL_WEB: ${{ vars.BASE_URL_WEB }} 
       BASE_URL_API: ${{ vars.BASE_URL_API }}
-      TEST_ENVIRONMENT: ${{ inputs.environment }}  #its necessary to specify the environment from where the env variables values are coming from
+      TEST_ENVIRONMENT: ${{ github.event.inputs.environment }}  #its necessary to specify the environment from where the env variables values are coming from
   
     steps:
       - name: check environment variables content
