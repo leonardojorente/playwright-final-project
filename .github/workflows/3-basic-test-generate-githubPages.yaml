@@ -8,6 +8,7 @@ env:
   BASE_URL_API: "https://barrigarest.wcaquino.me"
   USER: 'cypresstest@gmail.com'
   PASSWORD: 'cypress'
+  url: ${{ steps.deployment.outputs.page_url }}
   
 permissions:
   pages: write
