@@ -78,3 +78,25 @@ jobs:
         with:
           name: test-results
           path: playwright-report/
+
+  deploy-report:
+    needs: e2e-tests
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
+    if: always()
+    
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./playwright-report
+          keep_files: false          
