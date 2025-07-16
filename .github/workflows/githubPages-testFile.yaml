@@ -1,44 +1,28 @@
-# nome da pipeline
-name: 'playwright report deploy pages test'
+name: 'Basic E2E Tests'
 
-#regras de disparo(triggers)
 on:
-  #gatilho de execucao a partir de outro pipe: workflow_dispatch
   workflow_dispatch:
 
-# trabalhos e tarefas dentor do pipeline: jobs
 jobs:
   e2e-tests:
-    # available images https://github.com/actions/runner-images
-    # maquina que o job vai executar
-    permissions:
-      pages: write
-      id-token: write
-      
     runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    #passos do script de build
+
     steps:
-      #clone do projeto
       - uses: actions/checkout@v4
 
-      #instalacao do node
       - uses: actions/setup-node@v4
         with:
           node-version: 22.x
 
-      #instalacao das dependencias
-      - name: Instalacao das dependencias
+      - name: Install dependencies
         run: npm ci
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
 
-      #instalacao do playwright
-      - name: Instalacao do playwright
-        run: npx playwright install
-
-      #executar os testes E2E
-      - name: Executando testes e2e
+      - name: Run Playwright tests
         run: npx playwright test tests/ui/e2e-tests/basic-tests.spec.ts
 
       - uses: actions/upload-artifact@v4 # upload test results
