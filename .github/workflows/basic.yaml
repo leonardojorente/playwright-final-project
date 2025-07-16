@@ -8,6 +8,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: read a variable
+        run: echo "The USER is $USER and the base url is $BASE_URL_WEB and $TEST"
+        env:
+          USER:  ${{ vars.USER }}
+          PASSWORD: ${{ secrets.PASSWORD }}
+          BASE_URL_WEB: ${{ vars.BASE_URL_WEB }} 
+          BASE_URL_API: ${{ vars.BASE_URL_API }}
+          
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
