@@ -1,4 +1,4 @@
-name: 'Basic E2E Tests'
+name: '2-basic-test-generate-report'
 
 on:
   workflow_dispatch:
