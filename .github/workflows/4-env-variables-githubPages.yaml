@@ -10,7 +10,6 @@ on:
         default: dev
   
 permissions:
-  contents: write  # Needed to push to gh-pages branch
   pages: write
   id-token: write
 
@@ -29,7 +28,6 @@ jobs:
       BASE_URL_API: ${{ vars.BASE_URL_API }}
       TEST_ENVIRONMENT: ${{ inputs.environment }}  #its necessary to specify the environment from where the env variables values are coming from
   
-
     steps:
       - name: check environment variables content
         run: | #it sets multiple lines for the echo command
