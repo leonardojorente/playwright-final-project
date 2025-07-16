@@ -22,26 +22,22 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}   
 
+    env:
+      USER:  ${{ vars.USER }}
+      PASSWORD: ${{ secrets.PASSWORD }}
+      BASE_URL_WEB: ${{ vars.BASE_URL_WEB }} 
+      BASE_URL_API: ${{ vars.BASE_URL_API }}
+      ENVIRONMENT: ${{ github.event.inputs.environment }}   
+
     steps:
 
-      #set up java for Allure
-      - uses: actions/checkout@v4
-      - name: Set up JDK
-        uses: actions/setup-java@v3
-        with:
-          distribution: zulu
-          java-version: 17
 
       - name: check environment variables content
         run:
-          echo "Base URL is $BASE_URL_WEB"
-          echo "Base URL API is $BASE_URL_API"
-        env:
-          USER:  ${{ vars.USER }}
-          PASSWORD: ${{ secrets.PASSWORD }}
-          BASE_URL_WEB: ${{ vars.BASE_URL_WEB }} 
-          BASE_URL_API: ${{ vars.BASE_URL_API }}
-          ENVIRONMENT: ${{ github.event.inputs.environment }}             
+          echo "Base URL web is ${{ env.BASE_URL_WEB }} "
+          echo "Base URL API is ${{ env.BASE_URL_API }} "
+          echo "Base USER is ${{ env.USER }} "
+          echo "Base environment is ${{ env.ENVIRONMENT }} "          
 
       # Checkout code    
       - uses: actions/checkout@v4
