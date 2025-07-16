@@ -1,13 +1,20 @@
-name: '4-basic-test-allure-githubPages'
+name: '4-env-variables-githubPages'
 
 on:
   workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Select the environment to run the tests against'
+        required: true
+        type: environment
+        default: dev
 
 env:
   BASE_URL_WEB: "https://barrigareact.wcaquino.me"
   BASE_URL_API: "https://barrigarest.wcaquino.me"
   USER: 'cypresstest@gmail.com'
   PASSWORD: 'cypress'
+  ENVIRONMENT: ${{ github.event.inputs.environment }}
   
 permissions:
   contents: write  # Needed to push to gh-pages branch

@@ -8,7 +8,6 @@ on:
         required: true
         type: environment
         default: dev
-        
 
 jobs:
   option-example:
