@@ -55,7 +55,7 @@ jobs:
 
       # upload html report results
       - uses: actions/upload-artifact@v4
-        if: ${{ !cancelled() }} # run this step even if previous step failed
+        if: ${{ !cancelled() }} # run this step even if previous step failed, doesnt run when the job is canceled like 'always()' option
         with:
           name: test-results
           path: playwright-report/index.html  
@@ -63,9 +63,13 @@ jobs:
 
       # Configure GitHub Pages
       - uses: actions/configure-pages@v5 # upload test results
+        if: ${{ !cancelled() }} 
+
 
       # Upload the HTML report as a GitHub Pages artifact
       - uses: actions/upload-pages-artifact@v3
+        if: ${{ !cancelled() }} 
+
         with:
           path: playwright-report/
 
@@ -73,7 +77,11 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        if: ${{ !cancelled() }} 
+
 
       - name: Show Report URL
+        if: ${{ !cancelled() }} 
+
         run: |   
           echo "📌 Playwright HTML Report: ${{ steps.deployment.outputs.page_url }}"
