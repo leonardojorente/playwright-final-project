@@ -22,22 +22,21 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}   
 
-    env:
-      USER:  ${{ vars.USER }}
-      PASSWORD: ${{ secrets.PASSWORD }}
-      BASE_URL_WEB: ${{ vars.BASE_URL_WEB }} 
-      BASE_URL_API: ${{ vars.BASE_URL_API }}
-      ENVIRONMENT: ${{ github.event.inputs.environment }}   
+  
 
     steps:
-
-
       - name: check environment variables content
         run:
-          echo "Base URL web is ${{ env.BASE_URL_WEB }} "
-          echo "Base URL API is ${{ env.BASE_URL_API }} "
-          echo "Base USER is ${{ env.USER }} "
-          echo "Base environment is ${{ env.ENVIRONMENT }} "          
+          echo "Base URL web is $BASE_URL_WEB "
+          echo "Base URL API is $BASE_URL_API}} "
+          echo "Base USER is $USER "
+          echo "Base environment is $ENVIRONMENT "
+        env:
+          USER:  ${{ vars.USER }}
+          PASSWORD: ${{ secrets.PASSWORD }}
+          BASE_URL_WEB: ${{ vars.BASE_URL_WEB }} 
+          BASE_URL_API: ${{ vars.BASE_URL_API }}
+          ENVIRONMENT: ${{ github.event.inputs.environment }}           
 
       # Checkout code    
       - uses: actions/checkout@v4
