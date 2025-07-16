@@ -68,6 +68,9 @@ pipeline {
 
         stage('Playright tests') {
             steps {
+                // Clean previous Allure results
+                sh 'rm -rf allure-results || true'
+                
                 sh 'npx playwright test tests/ui/e2e-tests/cross-env-tests.spec.ts'
             }
 
