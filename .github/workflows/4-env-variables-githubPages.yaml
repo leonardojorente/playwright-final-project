@@ -17,24 +17,24 @@ jobs:
   e2e-tests:
     runs-on: ubuntu-latest
     
-    environment: ${{ github.event.inputs.environment }}
-      #name: github-pages
-      #url: ${{ steps.deployment.outputs.page_url }}   
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}   
       
     env:
+      TEST_ENVIRONMENT: ${{ github.event.inputs.environment }}
       USER:  ${{ vars.USER }}
       PASSWORD: ${{ secrets.PASSWORD }}
       BASE_URL_WEB: ${{ vars.BASE_URL_WEB }} 
       BASE_URL_API: ${{ vars.BASE_URL_API }}
-      TEST_ENVIRONMENT: ${{ github.event.inputs.environment }}  #its necessary to specify the environment from where the env variables values are coming from
   
     steps:
       - name: check environment variables content
         run: | #it sets multiple lines for the echo command
-          echo "Base URL web is $BASE_URL_WEB "
-          echo "Base URL API is $BASE_URL_API}} "
-          echo "Base USER is $USER "
-          echo "Base environment is $ENVIRONMENT "         
+          echo "Base URL web is $BASE_URL_WEB"
+          echo "Base URL API is $BASE_URL_API"
+          echo "Base USER is $USER"
+          echo "Base environment is $TEST_ENVIRONMENT"         
 
       # Checkout code    
       - uses: actions/checkout@v4
