@@ -14,6 +14,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: check environment variables content
+        run: |
+          echo "USER is $USER"
+          echo "Base URL is $BASE_URL_WEB"
+          echo "Base URL API is $BASE_URL_API"
+        env:
+          USER:  ${{ vars.USER }}
+          PASSWORD: ${{ secrets.PASSWORD }}
+          BASE_URL_WEB: ${{ vars.BASE_URL_WEB }} 
+          BASE_URL_API: ${{ vars.BASE_URL_API }}
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
