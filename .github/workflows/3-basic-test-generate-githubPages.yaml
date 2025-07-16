@@ -1,4 +1,4 @@
-name: '2-basic-test-generate-report'
+name: '3-basic-test-generate-githubPages'
 
 on:
   workflow_dispatch:
