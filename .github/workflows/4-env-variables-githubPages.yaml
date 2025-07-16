@@ -16,13 +16,10 @@ permissions:
 jobs:
   e2e-tests:
     runs-on: ubuntu-latest
-    
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}   
-      
+  
+    environment: ${{ github.event.inputs.environment }}
+
     env:
-      TEST_ENVIRONMENT: ${{ github.event.inputs.environment }}
       USER:  ${{ vars.USER }}
       PASSWORD: ${{ secrets.PASSWORD }}
       BASE_URL_WEB: ${{ vars.BASE_URL_WEB }} 
@@ -76,3 +73,7 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Show Report URL
+        run: |   
+          echo "📌 Playwright HTML Report: ${{ steps.deployment.outputs.page_url }}"
