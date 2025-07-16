@@ -2,6 +2,12 @@ name: 'Basic E2E Tests'
 
 on:
   workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Select the environment to run the tests against'
+        required: true
+        type: environment
+        default: dev
 
 jobs:
   e2e-tests:
@@ -17,7 +23,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Install Playwright Browsers
-        run: npx playwright install chrome
+        run: npx playwright install --with-deps chromium
 
       - name: Run Playwright tests
         run: npx playwright test tests/ui/e2e-tests/basic-tests.spec.ts
