@@ -18,25 +18,25 @@ jobs:
   e2e-tests:
     runs-on: ubuntu-latest
     
-    environment:
+    environment: 
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}   
-
+      
+    env:
+      USER:  ${{ vars.USER }}
+      PASSWORD: ${{ secrets.PASSWORD }}
+      BASE_URL_WEB: ${{ vars.BASE_URL_WEB }} 
+      BASE_URL_API: ${{ vars.BASE_URL_API }}
+      TEST_ENVIRONMENT: ${{ inputs.environment }}  #its necessary to specify the environment from where the env variables values are coming from
   
 
     steps:
       - name: check environment variables content
-        run:
+        run: | #it sets multiple lines for the echo command
           echo "Base URL web is $BASE_URL_WEB "
           echo "Base URL API is $BASE_URL_API}} "
           echo "Base USER is $USER "
-          echo "Base environment is $ENVIRONMENT "
-        env:
-          USER:  ${{ vars.USER }}
-          PASSWORD: ${{ secrets.PASSWORD }}
-          BASE_URL_WEB: ${{ vars.BASE_URL_WEB }} 
-          BASE_URL_API: ${{ vars.BASE_URL_API }}
-          ENVIRONMENT: ${{ github.event.inputs.environment }}           
+          echo "Base environment is $ENVIRONMENT "         
 
       # Checkout code    
       - uses: actions/checkout@v4
@@ -57,12 +57,6 @@ jobs:
       # Run Playwright tests  
       - name: Run Playwright tests
         run: npx playwright test tests/ui/e2e-tests/basic-tests.spec.ts
-        env:
-          USER:  ${{ vars.USER }}
-          PASSWORD: ${{ secrets.PASSWORD }}
-          BASE_URL_WEB: ${{ vars.BASE_URL_WEB }} 
-          BASE_URL_API: ${{ vars.BASE_URL_API }}
-          ENVIRONMENT: ${{ github.event.inputs.environment }}  
 
       # upload html report results
       - uses: actions/upload-artifact@v4
