@@ -1,4 +1,4 @@
-name: 'E2E Tests'
+name: 'html report workflow'
 #https://github.blog/changelog/2021-11-10-github-actions-input-types-for-manual-workflows/
 on:
   workflow_dispatch:
