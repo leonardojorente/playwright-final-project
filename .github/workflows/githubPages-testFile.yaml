@@ -1,4 +1,4 @@
-name: 'Basic E2E Tests'
+name: 'github pages test file workflow'
 
 on:
   workflow_dispatch:
