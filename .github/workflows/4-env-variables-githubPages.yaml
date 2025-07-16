@@ -79,9 +79,8 @@ jobs:
         uses: actions/deploy-pages@v4
         if: ${{ !cancelled() }} 
 
-
       - name: Show Report URL
-        if: ${{ !cancelled() }} 
+        if: ${{ !cancelled() && steps.deployment.outcome == 'success' }} 
 
         run: |   
           echo "📌 Playwright HTML Report: ${{ steps.deployment.outputs.page_url }}"
