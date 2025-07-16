@@ -70,14 +70,14 @@ pipeline {
             steps {
                 sh 'npx playwright test tests/ui/e2e-tests/cross-env-tests.spec.ts'
             }
-        }
 
-        post {
-            always {
-                allure includeProperties:
-                false,
-                jdk: '',
-                results: [[path: 'allure-results']]
+            post {
+                always {
+                    allure includeProperties:
+                    false,
+                    jdk: '',
+                    results: [[path: 'allure-results']]
+                }
             }
         }
     }
