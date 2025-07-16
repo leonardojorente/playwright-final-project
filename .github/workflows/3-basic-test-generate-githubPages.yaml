@@ -1,0 +1,63 @@
+name: '2-basic-test-generate-report'
+
+on:
+  workflow_dispatch:
+
+env:
+  BASE_URL_WEB: "https://barrigareact.wcaquino.me"
+  BASE_URL_API: "https://barrigarest.wcaquino.me"
+  USER: 'cypresstest@gmail.com'
+  PASSWORD: 'cypress'
+  
+permissions:
+  pages: write
+  id-token: write
+
+jobs:
+  e2e-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: check environment variables content
+        run:
+          echo "Base URL is $BASE_URL_WEB"
+          echo "Base URL API is $BASE_URL_API"
+
+      # Checkout code    
+      - uses: actions/checkout@v4
+
+      # Setup Node.js
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+
+      # Install dependencies    
+      - name: Install dependencies
+        run: npm ci
+
+      # Install Playwright Browsers  
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps chromium
+
+      # Run Playwright tests  
+      - name: Run Playwright tests
+        run: npx playwright test tests/ui/e2e-tests/basic-tests.spec.ts
+
+      # upload html report results
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }} # run this step even if previous step failed
+        with:
+          name: test-results
+          path: playwright-report/index.html  
+          retention-days: 1
+
+      - uses: actions/configure-pages@v5 # upload test results
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: playwright-report/
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+      
