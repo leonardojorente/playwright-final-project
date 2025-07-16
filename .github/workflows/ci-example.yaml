@@ -73,11 +73,13 @@ jobs:
           BASE_URL_WEB: ${{ vars.BASE_URL_WEB }} 
           BASE_URL_API: ${{ vars.BASE_URL_API }}
 
-      - uses: actions/upload-artifact@v4 # upload test results
+      - name: Upload HTML report
+        uses: actions/upload-artifact@v4 # upload test results
         if: ${{ always() }}
         with:
-          name: test-results
+          name: playwright-report
           path: playwright-report/
+          retention-days: 1
 
   deploy-report:
     needs: e2e-tests
