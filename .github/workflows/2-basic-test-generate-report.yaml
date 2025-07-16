@@ -44,4 +44,6 @@ jobs:
         if: ${{ !cancelled() }} # run this step even if previous step failed
         with:
           name: test-results
-          path: playwright-report/index.html        
+          path: playwright-report/index.html  
+          retention-days: 1
+      
