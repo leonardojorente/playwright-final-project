@@ -1,4 +1,4 @@
-name: '3-basic-test-generate-githubPages'
+name: '3-basic-test-html-githubPages'
 
 on:
   workflow_dispatch:
@@ -8,7 +8,6 @@ env:
   BASE_URL_API: "https://barrigarest.wcaquino.me"
   USER: 'cypresstest@gmail.com'
   PASSWORD: 'cypress'
-  url: ${{ steps.deployment.outputs.page_url }}
   
 permissions:
   pages: write
@@ -17,6 +16,10 @@ permissions:
 jobs:
   e2e-tests:
     runs-on: ubuntu-latest
+    
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - name: check environment variables content
