@@ -1,4 +1,4 @@
-name: '3-basic-test-html-githubPages'
+name: '4-basic-test-allure-githubPages'
 
 on:
   workflow_dispatch:
@@ -19,10 +19,18 @@ jobs:
     
     environment:
       name: github-pages
-      # This is used to set the environment URL in the GitHub UI "e2e-tests" job box
       url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
+
+      #set up java for Allure
+      - uses: actions/checkout@v4
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: zulu
+          java-version: 17
+
       - name: check environment variables content
         run:
           echo "Base URL is $BASE_URL_WEB"
@@ -52,20 +60,30 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }} # run this step even if previous step failed
         with:
-          name: test-results
-          path: playwright-report/index.html  
+          name: allure-results
+          path: allure-results
           retention-days: 1
 
-      # Configure GitHub Pages
-      - uses: actions/configure-pages@v5 # upload test results
-
-      # Upload the HTML report as a GitHub Pages artifact
-      - uses: actions/upload-pages-artifact@v3
+      - name: Load test report history
+        uses: actions/checkout@v3
+        if: always()
+        continue-on-error: true
         with:
-          path: playwright-report/
+          ref: gh-pages
+          path: gh-pages
 
-      # Deploy the HTML report to GitHub Pages
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
-      
+      - name: Build test report
+        uses: simple-elf/allure-report-action@v1.7
+        if: always()
+        with:
+          gh_pages: gh-pages
+          allure_history: allure-history
+          allure_results: build/allure-results
+
+      - name: Publish test report
+        uses: peaceiris/actions-gh-pages@v3
+        if: always()
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: allure-history
