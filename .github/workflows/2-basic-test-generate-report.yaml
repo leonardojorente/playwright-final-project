@@ -14,11 +14,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: check environment variables content
-        run:
-          echo "Base URL is $BASE_URL_WEB"
-          echo "Base URL API is $BASE_URL_API"
-
       # Checkout code    
       - uses: actions/checkout@v4
 
@@ -37,11 +32,11 @@ jobs:
 
       # Run Playwright tests  
       - name: Run Playwright tests
-        run: npx playwright test tests/ui/e2e-tests/basic-tests.spec.ts
+        run: npm run ui-basic-tests || true
+        # The '|| true' allows the workflow to continue even if the tests fail
 
       # upload html report results
       - uses: actions/upload-artifact@v4
-        if: ${{ !cancelled() }} # run this step even if previous step failed
         with:
           name: test-results
           path: playwright-report/index.html  

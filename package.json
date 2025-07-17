@@ -9,6 +9,7 @@
     "ui-login-tests": "playwright test tests/ui/e2e-tests/login-tests.spec.ts",
     "ui-account-tests": "playwright test tests/ui/e2e-tests/account-tests.spec.ts",
     "ui-step-and-describe-tests": "playwright test tests/ui/e2e-tests/step-and-describe-goo-practice-tests.spec.ts",
+    "ui-cross-env-ci": "playwright test tests/ui/e2e-tests/cross-env-tests.spec.ts",
     "ui-switch-env-prod": "cross-env TEST_ENV=prod playwright test tests/ui/e2e-tests/cross-env-tests.spec.ts",
     "ui-switch-env-dev": "cross-env TEST_ENV=dev playwright test tests/ui/e2e-tests/cross-env-tests.spec.ts",
     "ui-response-api-check": "playwright test tests/ui/e2e-tests/api-respose-check-tests.spec.ts",

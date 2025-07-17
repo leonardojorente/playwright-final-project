@@ -11,24 +11,26 @@ env:
 
 jobs:
   e2e-tests:
+    # specify the environment to run the tests against
     runs-on: ubuntu-latest
 
     steps:
-      - name: check environment variables content
-        run:
-          echo "Base URL is $BASE_URL_WEB"
-          echo "Base URL API is $BASE_URL_API"
-
+      #checkout code
       - uses: actions/checkout@v4
 
+      # Setup Node.js
       - uses: actions/setup-node@v4
         with:
           node-version: 22.x
 
+      # Install dependencies
       - name: Install dependencies
         run: npm ci
+
+      # Install Playwright Browsers
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps chromium
 
+      # Run Playwright tests
       - name: Run Playwright tests
         run: npm run ui-basic-tests

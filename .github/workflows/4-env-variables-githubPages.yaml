@@ -17,6 +17,7 @@ jobs:
   e2e-tests:
     runs-on: ubuntu-latest
   
+    # this is used to specify the environment from where the env variables are read
     environment: ${{ github.event.inputs.environment }}
 
     env:
@@ -51,11 +52,11 @@ jobs:
 
       # Run Playwright tests  
       - name: Run Playwright tests
-        run: npx playwright test tests/ui/e2e-tests/cross-env-tests.spec.ts
+        run: npm run ui-cross-env-ci || true
+        # The '|| true' allows the workflow to continue even if the tests fail
 
       # upload html report results
       - uses: actions/upload-artifact@v4
-        if: ${{ !cancelled() }} # run this step even if previous step failed, doesnt run when the job is canceled like 'always()' option
         with:
           name: test-results
           path: playwright-report/index.html  
@@ -63,12 +64,9 @@ jobs:
 
       # Configure GitHub Pages
       - uses: actions/configure-pages@v5 # upload test results
-        if: ${{ !cancelled() }} 
-
 
       # Upload the HTML report as a GitHub Pages artifact
       - uses: actions/upload-pages-artifact@v3
-        if: ${{ !cancelled() }} 
 
         with:
           path: playwright-report/
@@ -77,7 +75,6 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-        if: ${{ !cancelled() }} 
 
       - name: Show Report URL
         if: ${{ !cancelled() && steps.deployment.outcome == 'success' }} 

@@ -17,17 +17,14 @@ jobs:
   e2e-tests:
     runs-on: ubuntu-latest
     
+    # This is used to set the environment URL in the GitHub UI "e2e-tests" job box
+    # it cannot be used together with the "environment" used to env variables
+
     environment:
       name: github-pages
-      # This is used to set the environment URL in the GitHub UI "e2e-tests" job box
       url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
-      - name: check environment variables content
-        run:
-          echo "Base URL is $BASE_URL_WEB"
-          echo "Base URL API is $BASE_URL_API"
-
       # Checkout code    
       - uses: actions/checkout@v4
 
@@ -46,7 +43,7 @@ jobs:
 
       # Run Playwright tests  
       - name: Run Playwright tests
-        run: npx playwright test tests/ui/e2e-tests/basic-tests.spec.ts
+        run: npm run ui-basic-tests
 
       # upload html report results
       - uses: actions/upload-artifact@v4
