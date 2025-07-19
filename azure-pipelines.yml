@@ -24,6 +24,14 @@ variables:
   - group: 'variables_prod'
 - ${{ if eq(parameters.environment, 'dev') }}:
   - group: 'variables_dev'  
+- name: BASE_URL_WEB
+  value: $(BASE_URL_WEB)
+- name: BASE_URL_API
+  value: $(BASE_URL_API)
+- name: USER
+  value: $(USER)
+- name: PASSWORD
+  value: $(PASSWORD)  
 
 jobs:
 - job: e2e_tests
@@ -33,12 +41,6 @@ jobs:
     name: 'Default' # use my self-hosted agent
     demands:
       - agent.name -equals AgentSelfHosted  # Substitua pelo nome da máquina
-
-  env:
-    BASE_URL_WEB: $(BASE_URL_WEB)
-    BASE_URL_API: $(BASE_URL_API)
-    TEST_USER: $(USER)
-    TEST_PASSWORD: $(PASSWORD)  # Mapeia variável
 
   steps:
     # Passo para imprimir todas as variáveis
