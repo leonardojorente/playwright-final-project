@@ -7,11 +7,6 @@
 
 name: Basic E2E Tests
 
-# Variáveis globais (acessíveis em todos os jobs)
-variables:
-  # Variável de string fixa
-  BASE_URL_WEB: 'https://barrigareact.wcaquino.me'
-
 trigger: none  # Manual trigger only (equivalent to workflow_dispatch)
 
 # select enviroment to run manuaal tests
@@ -29,6 +24,7 @@ variables:
   - group: 'variables_prod'
 - ${{ if eq(parameters.environment, 'dev') }}:
   - group: 'variables_dev'  
+BASE_URL_WEB: 'https://barrigareact.wcaquino.me'  
 
 jobs:
 - job: e2e_tests
