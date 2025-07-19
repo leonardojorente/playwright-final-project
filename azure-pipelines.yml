@@ -20,18 +20,17 @@ parameters:
   - dev
 
 variables:
-- ${{ if eq(parameters.environment, 'prod') }}:
-  - group: 'variables_prod'
-- ${{ if eq(parameters.environment, 'dev') }}:
-  - group: 'variables_dev'  
+- group: 'variables_prod'
+
+- group: 'variables_dev'  
 - name: BASE_URL_WEB
-  value: $(BASE_URL_WEB)
+  value: $(variables_prod.BASE_URL_WEB)
 - name: BASE_URL_API
-  value: $(BASE_URL_API)
+  value: $(variables_prod.BASE_URL_API)
 - name: USER
-  value: $(USER)
+  value: $(variables_prod.USER)
 - name: PASSWORD
-  value: $(PASSWORD)  
+  value: $(variables_prod.PASSWORD)  
 
 jobs:
 - job: e2e_tests
