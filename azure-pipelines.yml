@@ -24,6 +24,11 @@ variables:
   - group: 'variables_prod'
 - ${{ if eq(parameters.environment, 'dev') }}:
   - group: 'variables_dev'  
+  env:
+    BASE_URL_WEB: $(BASE_URL_WEB)
+    BASE_URL_API: $(BASE_URL_API)
+    TEST_USER: $(USER)
+    TEST_PASSWORD: $(PASSWORD)  # Mapeia variável
 
 jobs:
 - job: e2e_tests
@@ -49,11 +54,7 @@ jobs:
       echo "Agent OS: $(Agent.OS)"
       echo "========================================"
     displayName: 'Set and Print Variables'
-    env:
-      BASE_URL_WEB: $(BASE_URL_WEB)
-      BASE_URL_API: $(BASE_URL_API)
-      TEST_USER: $(USER)
-      TEST_PASSWORD: $(PASSWORD)  # Mapeia variável
+
 
   - checkout: self
     displayName: 'Checkout code'
