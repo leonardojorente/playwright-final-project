@@ -24,7 +24,6 @@ variables:
   - group: 'variables_prod'
 - ${{ if eq(parameters.environment, 'dev') }}:
   - group: 'variables_dev'  
-BASE_URL_WEB: 'https://barrigareact.wcaquino.me'  
 
 jobs:
 - job: e2e_tests
