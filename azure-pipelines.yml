@@ -43,7 +43,7 @@ jobs:
       echo "Build Number: $(Build.BuildNumber)"
       echo "Environment: ${{ parameters.environment }}"
       echo "Headless Mode: ${{ parameters.headless }}"
-      echo "BASE_URL_WEB: $(BASE_URL_WEB)"
+      echo "BASE_URL_WEB: $BASE_URL_WEB"
       echo "BASE_URL_API: $BASE_URL_API"
       echo "USER: $USER"
       echo "Agent Name: $(Agent.Name)"
