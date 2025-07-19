@@ -24,11 +24,6 @@ variables:
   - group: 'variables_prod'
 - ${{ if eq(parameters.environment, 'dev') }}:
   - group: 'variables_dev'  
-  env:
-    BASE_URL_WEB: $(BASE_URL_WEB)
-    BASE_URL_API: $(BASE_URL_API)
-    TEST_USER: $(USER)
-    TEST_PASSWORD: $(PASSWORD)  # Mapeia variável
 
 jobs:
 - job: e2e_tests
@@ -39,17 +34,22 @@ jobs:
     demands:
       - agent.name -equals AgentSelfHosted  # Substitua pelo nome da máquina
 
-  steps:
+  env:
+    BASE_URL_WEB: $(BASE_URL_WEB)
+    BASE_URL_API: $(BASE_URL_API)
+    TEST_USER: $(USER)
+    TEST_PASSWORD: $(PASSWORD)  # Mapeia variável
 
+  steps:
     # Passo para imprimir todas as variáveis
   - script: |
       echo "========== PRINTING VARIABLES =========="
       echo "Build ID: $(Build.BuildId)"
       echo "Build Number: $(Build.BuildNumber)"
       echo "Environment: ${{ parameters.environment }}"
-      echo "BASE_URL_WEB: $(BASE_URL_WEB)"
-      echo "BASE_URL_API: $(BASE_URL_API)"
-      echo "USER: $(USER)"
+      echo "BASE_URL_WEB: $BASE_URL_WEB"
+      echo "BASE_URL_API: $BASE_URL_API"
+      echo "USER: $USER"
       echo "Agent Name: $(Agent.Name)"
       echo "Agent OS: $(Agent.OS)"
       echo "========================================"
