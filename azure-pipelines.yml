@@ -11,9 +11,6 @@ name: Basic E2E Tests
 variables:
   # Variável de string fixa
   BASE_URL_WEB: 'https://barrigareact.wcaquino.me'
-  BASE_URL_API: 'https://barrigarest.wcaquino.me'
-  USER: 'leonardoprodenv@gmail.com'
-  PASSWORD: 'prodenv'
 
 trigger: none  # Manual trigger only (equivalent to workflow_dispatch)
 
@@ -27,16 +24,38 @@ parameters:
   - prod
   - dev
 
+variables:
+- ${{ if eq(parameters.environment, 'prod') }}:
+  - group: 'variables_prod'
+- ${{ if eq(parameters.environment, 'dev') }}:
+  - group: 'variables_dev'  
+
 jobs:
 - job: e2e_tests
   displayName: Run E2E Tests
   pool:
     #vmImage: 'ubuntu-20.04' #free ubuntu image available for Azure DevOps
     name: 'Default' # use my self-hosted agent
+    demands:
+      - agent.name -equals AgentSelfHosted  # Substitua pelo nome da máquina
 
-
-  
   steps:
+
+    # Passo para imprimir todas as variáveis
+  - script: |
+      echo "========== PRINTING VARIABLES =========="
+      echo "Build ID: $(Build.BuildId)"
+      echo "Build Number: $(Build.BuildNumber)"
+      echo "Environment: ${{ parameters.environment }}"
+      echo "Headless Mode: ${{ parameters.headless }}"
+      echo "BASE_URL_WEB: $(BASE_URL_WEB)"
+      echo "BASE_URL_API: $BASE_URL_API"
+      echo "USER: $USER"
+      echo "Agent Name: $(Agent.Name)"
+      echo "Agent OS: $(Agent.OS)"
+      echo "========================================"
+    displayName: 'Print Variables'
+
   - checkout: self
     displayName: 'Checkout code'
 
