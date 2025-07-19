@@ -7,13 +7,32 @@
 
 name: Basic E2E Tests
 
+# Variáveis globais (acessíveis em todos os jobs)
+variables:
+  # Variável de string fixa
+  BASE_URL_WEB: 'https://barrigareact.wcaquino.me'
+  BASE_URL_API: 'https://barrigarest.wcaquino.me'
+  USER: 'leonardoprodenv@gmail.com'
+  PASSWORD: 'prodenv'
+
 trigger: none  # Manual trigger only (equivalent to workflow_dispatch)
+
+# select enviroment to run manuaal tests
+parameters:
+- name: environment
+  displayName: test environment
+  type: string
+  default: prod
+  values:
+  - prod
+  - dev
 
 jobs:
 - job: e2e_tests
   displayName: Run E2E Tests
   pool:
-    vmImage: 'ubuntu-20.04' #free ubuntu image available for Azure DevOps
+    #vmImage: 'ubuntu-20.04' #free ubuntu image available for Azure DevOps
+    name: 'AgentSelfHosted' # use my self-hosted agent
   
   steps:
   - checkout: self
@@ -27,7 +46,7 @@ jobs:
   - script: npm ci
     displayName: 'Install dependencies'
 
-  - script: npx playwright install --with-deps
+  - script: npx playwright install --with-deps chromium
     displayName: 'Install Playwright Browsers'
 
   - script: npx playwright test tests/ui/e2e-tests/basic-tests.spec.ts

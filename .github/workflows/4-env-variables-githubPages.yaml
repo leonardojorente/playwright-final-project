@@ -32,7 +32,6 @@ jobs:
           echo "Base URL web is $BASE_URL_WEB"
           echo "Base URL API is $BASE_URL_API"
           echo "Base USER is $USER"
-          echo "Base environment is $TEST_ENVIRONMENT"         
 
       # Checkout code    
       - uses: actions/checkout@v4

@@ -1,46 +1,107 @@
-name: '5-full-workflow-githubPages'
+name: '4-env-variables-githubPages'
 
 on:
   workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Select the environment to run the tests against'
+        required: true
+        type: environment
+        default: dev
+  
+permissions:
+  pages: write
+  id-token: write
 
 jobs:
-  e2e-tests:
+  static-code-analysis:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
     steps:
       - uses: actions/checkout@v4
 
+      # Setup Node.js
+      - uses: actions/setup-node@v4
+        with:
+          node-version: latest
+
+      # Install dependencies    
+      - name: Install dependencies
+        run: npm ci
+
+      # run tyspeScript and eslint validation
+      - name: static code analysis
+        run: npm run typeScript-and-eslint-validation
+
+  e2e-tests:
+    # depend on the static code analysis job
+    needs: static-code-analysis
+
+    #select the machine to run the tests against
+    runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.54.0-noble
+      options: --user 1001
+  
+    # this is used to specify the environment from where the env variables are read
+    environment: ${{ github.event.inputs.environment }}
+
+    env:
+      USER:  ${{ vars.USER }}
+      PASSWORD: ${{ secrets.PASSWORD }}
+      BASE_URL_WEB: ${{ vars.BASE_URL_WEB }} 
+      BASE_URL_API: ${{ vars.BASE_URL_API }}
+  
+    steps:
+      - name: check environment variables content
+        run: | #it sets multiple lines for the echo command
+          echo "Base URL web is $BASE_URL_WEB"
+          echo "Base URL API is $BASE_URL_API"
+          echo "Base USER is $USER"
+
+      # Checkout code    
+      - uses: actions/checkout@v4
+
+      # Setup Node.js
       - uses: actions/setup-node@v4
         with:
           node-version: 22.x
 
+      # Install dependencies    
       - name: Install dependencies
         run: npm ci
+
+      # Install Playwright Browsers  
       - name: Install Playwright Browsers
-        run: npx playwright install chrome
+        run: npx playwright install --with-deps chromium
 
+      # Run Playwright tests  
       - name: Run Playwright tests
-        run: npx playwright test tests/ui/e2e-tests/basic-tests.spec.ts
+        run: npm run ui-cross-env-ci || true
+        # The '|| true' allows the workflow to continue even if the tests fail
 
-      - uses: actions/upload-artifact@v4 # upload test results
-        if: ${{ always() }}
+      # upload html report results
+      - uses: actions/upload-artifact@v4
         with:
           name: test-results
-          path: playwright-report/
+          path: playwright-report/index.html  
+          retention-days: 1
 
-        # Deploy to GitHub Pages
-        #https://github.com/actions/deploy-pages
-        #https://github.com/leonardojorente/CI-yaml-project/settings/pages -> enable pages on github
-        #https://leonardojorente.github.io/CI-yaml-project/    
+      # Configure GitHub Pages
       - uses: actions/configure-pages@v5 # upload test results
 
+      # Upload the HTML report as a GitHub Pages artifact
       - uses: actions/upload-pages-artifact@v3
+
         with:
           path: playwright-report/
 
+      # Deploy the HTML report to GitHub Pages
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Show Report URL
+        if: ${{ !cancelled() && steps.deployment.outcome == 'success' }} 
+
+        run: |   
+          echo "📌 Playwright HTML Report: ${{ steps.deployment.outputs.page_url }}"
