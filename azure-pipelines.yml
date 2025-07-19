@@ -25,6 +25,12 @@ variables:
 - ${{ if eq(parameters.environment, 'dev') }}:
   - group: 'variables_dev'  
 
+env:
+  BASE_URL_WEB: $(BASE_URL_WEB)
+  BASE_URL_API: $(BASE_URL_API)
+  TEST_USER: $(USER)
+  TEST_PASSWORD: $(PASSWORD)  # Mapeia variável
+
 jobs:
 - job: e2e_tests
   displayName: Run E2E Tests
