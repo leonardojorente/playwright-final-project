@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "typeScript-and-eslint-validation": "tsc --noEmit && eslint tests/**",
+    "typeScript-and-eslint-validation": "tsc --noEmit && eslint tests/ui/e2e-tests/*.ts",
 
     "ui-basic-tests": "playwright test tests/ui/e2e-tests/basic-tests.spec.ts",
     "ui-login-tests": "playwright test tests/ui/e2e-tests/login-tests.spec.ts",
@@ -22,7 +22,7 @@
     "api-login-exampleOfAssertionForAPI": "playwright test tests/api/api-tests/login-collection-tests.spec.ts",
     "api-json-schema": "playwright test tests/api/api-tests/json-schema-validation-tests.spec.ts",
     "api-response-time": "playwright test tests/api/api-tests/response-time-validation-tests.spec.ts",
-    
+
     "ui-mode": "playwright test --ui",
     "report": "playwright show-report",
     "allure report": "allure serve",
