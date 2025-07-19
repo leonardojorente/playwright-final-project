@@ -32,7 +32,9 @@ jobs:
   displayName: Run E2E Tests
   pool:
     #vmImage: 'ubuntu-20.04' #free ubuntu image available for Azure DevOps
-    name: 'AgentSelfHosted' # use my self-hosted agent
+    name: 'Default' # use my self-hosted agent
+
+
   
   steps:
   - checkout: self

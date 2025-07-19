@@ -1,4 +1,4 @@
-name: '4-env-variables-githubPages'
+name: '5-full-workflow-githubPages'
 
 on:
   workflow_dispatch:
