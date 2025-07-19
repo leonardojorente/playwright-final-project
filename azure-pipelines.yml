@@ -22,16 +22,6 @@ parameters:
 variables:
 - group: 'variables_prod'
 
-- group: 'variables_dev'  
-- name: BASE_URL_WEB
-  value: $(variables_prod.BASE_URL_WEB)
-- name: BASE_URL_API
-  value: $(variables_prod.BASE_URL_API)
-- name: USER
-  value: $(variables_prod.USER)
-- name: PASSWORD
-  value: $(variables_prod.PASSWORD)  
-
 jobs:
 - job: e2e_tests
   displayName: Run E2E Tests
@@ -48,9 +38,9 @@ jobs:
       echo "Build ID: $(Build.BuildId)"
       echo "Build Number: $(Build.BuildNumber)"
       echo "Environment: ${{ parameters.environment }}"
-      echo "BASE_URL_WEB: $BASE_URL_WEB"
-      echo "BASE_URL_API: $BASE_URL_API"
-      echo "USER: $USER"
+      echo "BASE_URL_WEB: $(BASE_URL_WEB)"
+      echo "BASE_URL_API: $(BASE_URL_API)"
+      echo "USER: $(USER)"
       echo "Agent Name: $(Agent.Name)"
       echo "Agent OS: $(Agent.OS)"
       echo "========================================"
