@@ -20,7 +20,10 @@ parameters:
   - dev
 
 variables:
-- group: 'variables_prod'
+- ${{ if eq(parameters.environment, 'prod') }}:
+    - group: 'variables_prod'
+- ${{ if eq(parameters.environment, 'dev') }}:
+    - group: 'variables_dev'
 
 jobs:
 - job: e2e_tests
