@@ -28,7 +28,7 @@ jobs:
       - agent.name -equals AgentSelfHosted  # Substitua pelo nome da máquina
 
   steps:
-    # Passo para imprimir todas as variáveis
+    # print environment variables
   - script: |
       echo "========== PRINTING VARIABLES =========="
       echo "Build ID: $(Build.BuildId)"
@@ -62,7 +62,7 @@ jobs:
     displayName: 'Run Playwright tests'
     env:
       CI: true
-      PASSWORD: $(PASSWORD)
+      PASSWORD: $(PASSWORD) # Explicit mapping for secret variable
 
 
   - task: PublishPipelineArtifact@1
