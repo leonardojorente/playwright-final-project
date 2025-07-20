@@ -56,7 +56,8 @@ jobs:
         run: | #it sets multiple lines for the echo command
           echo "Base URL web is $BASE_URL_WEB"
           echo "Base URL API is $BASE_URL_API"
-          echo "Base USER is $USER"
+          echo "USER is $USER"
+          echo "ENVIRONMENT is ${{ github.event.inputs.environment }}"
 
       # Checkout code    
       - uses: actions/checkout@v4
