@@ -72,7 +72,7 @@ jobs:
 
       # Install Playwright Browsers  
       - name: Install Playwright Browsers
-        run: npx playwright install --with-deps chromium
+        run: npx playwright install chromium #eliminate the --with-deps option because the user of the docker is not roots
 
       # Run Playwright tests  
       - name: Run Playwright tests
