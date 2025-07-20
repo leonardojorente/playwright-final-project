@@ -75,4 +75,11 @@ jobs:
       artifact: 'playwright-report'
       publishLocation: 'pipeline'
     condition: succeededOrFailed()  # Always publish the report, even if tests fail
-    displayName: 'Publish Playwright Report'
+    displayName: 'Publish Playwright artifact report html'
+
+  - task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'JUnit'
+    testResultsFiles: '**/e2e-*.xml'
+  condition: succeededOrFailed()  # Always publish the report, even if tests fail
+  displayName: 'Publish Playwright junit report'  
