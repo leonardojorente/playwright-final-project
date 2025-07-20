@@ -66,3 +66,5 @@ jobs:
 
   - script: npx playwright test tests/ui/e2e-tests/basic-tests.spec.ts
     displayName: 'Run Playwright tests'
+    env:
+      CI: true
