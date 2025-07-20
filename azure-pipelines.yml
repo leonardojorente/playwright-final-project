@@ -64,7 +64,7 @@ jobs:
   - script: npx playwright install --with-deps chromium
     displayName: 'Install Playwright Browsers'
 
-  - script: npx playwright test tests/ui/e2e-tests/basic-tests.spec.ts
+  - script: npm ui-cross-env-ci
     displayName: 'Run Playwright tests'
     env:
       CI: true
@@ -78,8 +78,8 @@ jobs:
     displayName: 'Publish Playwright artifact report html'
 
   - task: PublishTestResults@2
-  inputs:
-    testResultsFormat: 'JUnit'
-    testResultsFiles: '**/e2e-*.xml'
-  condition: succeededOrFailed()  # Always publish the report, even if tests fail
-  displayName: 'Publish Playwright junit report'  
+    inputs:
+      testResultsFormat: 'JUnit'
+      testResultsFiles: '**/e2e-*.xml'
+    condition: succeededOrFailed()  # Always publish the report, even if tests fail
+    displayName: 'Publish Playwright junit report'  
