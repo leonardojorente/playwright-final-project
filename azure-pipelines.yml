@@ -62,6 +62,8 @@ jobs:
     displayName: 'Run Playwright tests'
     env:
       CI: true
+      PASSWORD: $(PASSWORD)
+
 
   - task: PublishPipelineArtifact@1
     inputs:
