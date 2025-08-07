@@ -1,14 +1,16 @@
 import { Page } from "@playwright/test";
+import { faker } from '@faker-js/faker'
+
+export const generateRandomAlphaNumericString = (length: number) =>{
+    return faker.string.alphanumeric(length)
+}
 
 export const generateRandomString = (length: number) => {
-    let result           = '';
-    const characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    const charactersLength = characters.length;
-    for ( let i = 0; i < length; i++ ) {
-        result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-        
-    return result;
+    return faker.string.alpha(length)
+}
+
+export const generateRandomNumberString = (length: number) => {
+    return faker.string.numeric(length)
 }
 
 // Listen for all console events and handle errors

@@ -4,6 +4,7 @@ import  TransactionPayload  from '@tests/data/request-payloads/post-transacoes-p
 import { TransactionRequests } from '@tests/api/api-requests/transaction-requests';
 import  AccountPayload  from '@tests/data/request-payloads/post-contas-payload.json';
 import { AccountRequests } from '@tests/api/api-requests/account-requests';
+import { generateTransaction } from '@tests/support/factories/transactionDataFactory';
 
 let accountId: number;
 
@@ -45,4 +46,17 @@ test('TC01 Create new Transaction by API', {tag: ['@regression', '@api']},  asyn
 
     const responseBody = await response.json();
     expect(responseBody.descricao).toBe(TransactionPayload.descricao);
+});
+
+test('TC02 Create new Transaction by API using factory', {tag: ['@regression', '@api']},  async ({ request, performance }) => {
+    // Create a transaction payload using the factory with some overrides
+    const transactionPayloadFactory = generateTransaction({ conta_id: accountId, valor: "2500", status: true });
+    const transactionRequests = new TransactionRequests(request)
+
+    const response = await transactionRequests.createNewTransaction(transactionPayloadFactory)
+
+    expect(response.status()).toBe(201);
+
+    const responseBody = await response.json();
+    expect(responseBody.descricao).toBe(transactionPayloadFactory.descricao);
 });

@@ -92,7 +92,6 @@ jobs:
 
       # Upload the HTML report as a GitHub Pages artifact
       - uses: actions/upload-pages-artifact@v3
-
         with:
           path: playwright-report/
 
